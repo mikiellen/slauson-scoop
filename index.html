@@ -1,0 +1,912 @@
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Slauson Scoop",
+  "schemaVersion": 1,
+  "description": "Slauson Scoop — weekly US pre-seed, seed, and Series A deal digest for Slauson & Co. Pulls live from the Fundraise Digest Notion database. Features editorial blog-style layout, stage filters, cross-edition search, archive by date, and source submission form.",
+  "mcpTools": [
+    "mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-query-database-view",
+    "mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-create-pages"
+  ],
+  "mcpServerNames": [
+    "Notion",
+    "Notion"
+  ]
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slauson Scoop</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: #FAFAF8;
+  color: #2A1F14;
+  min-height: 100vh;
+}
+
+/* NAV */
+.top-nav {
+  background: #F0EBE1;
+  border-bottom: 0.5px solid #D4C8B8;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.nav-logo {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: #221A12;
+  margin-right: auto;
+  letter-spacing: -0.3px;
+}
+.nav-tab {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8C7B68;
+  padding: 15px 18px;
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+.nav-tab:hover { color: #2A1F14; }
+.nav-tab.active { color: #221A12; border-bottom-color: #B5724A; }
+
+/* MASTHEAD */
+.masthead {
+  background: #F0EBE1;
+  padding: 32px 32px 0;
+  border-bottom: 0.5px solid #D4C8B8;
+}
+.mast-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9C8A76;
+  margin-bottom: 10px;
+}
+.pub-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 52px;
+  font-weight: bold;
+  color: #221A12;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.mast-rule {
+  border: none;
+  border-top: 1.5px solid #221A12;
+  margin: 14px 0 12px;
+}
+.mast-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mast-tagline { font-size: 11px; color: #7A6A58; }
+.mast-date { font-size: 11px; color: #7A6A58; }
+
+/* LEDE */
+.lede {
+  background: #E8E0D4;
+  padding: 20px 32px;
+  border-bottom: 0.5px solid #D4C8B8;
+}
+.lede-text {
+  font-size: 13px;
+  color: #3D3028;
+  line-height: 1.75;
+}
+.lede-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.lede-stat {
+  font-size: 10px;
+  color: #8C7B68;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.lede-stat strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  color: #221A12;
+  display: block;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 2px;
+  text-transform: none;
+  font-weight: bold;
+}
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  gap: 8px;
+  padding: 13px 32px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #F0EBE1;
+  border-bottom: 0.5px solid #D4C8B8;
+  position: sticky;
+  top: 46px;
+  z-index: 10;
+}
+.pill-divider {
+  width: 1px;
+  height: 18px;
+  background: #C4B8A8;
+  margin: 0 4px;
+}
+.pill {
+  font-size: 10px;
+  padding: 5px 13px;
+  border-radius: 99px;
+  border: 0.5px solid #C4B8A8;
+  color: #6B5C4C;
+  cursor: pointer;
+  background: transparent;
+  letter-spacing: 0.02em;
+  font-family: inherit;
+  transition: all 0.1s;
+}
+.pill.active { background: #221A12; color: #F0EBE1; border-color: #221A12; }
+.pill:not(.active):hover { background: rgba(34,26,18,0.06); }
+.pill.market.active { background: #6B4A2E; border-color: #6B4A2E; }
+.search-input {
+  font-size: 11px;
+  padding: 5px 14px;
+  border: 0.5px solid #C4B8A8;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.5);
+  color: #3D3028;
+  width: 170px;
+  font-family: inherit;
+  margin-left: auto;
+}
+.search-input::placeholder { color: #A89888; }
+.search-input:focus { outline: none; border-color: #B5724A; }
+
+/* DEAL BODY */
+.deals-body { padding: 0 32px 60px; background: #FAFAF8; }
+
+.section-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #B5724A;
+  padding: 24px 0 14px;
+  border-bottom: 0.5px solid #D4C8B8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-count {
+  color: #A89888;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10px;
+}
+
+.entry { padding: 22px 0; border-bottom: 0.5px solid #E8E0D4; }
+.entry-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+.entry-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 21px;
+  font-weight: bold;
+  color: #221A12;
+  line-height: 1.2;
+}
+.entry-amount {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  font-weight: normal;
+  color: #B5724A;
+}
+.women-badge {
+  font-size: 10px;
+  color: #B5724A;
+  background: rgba(181,114,74,0.12);
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+.market-badge {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 0.5px solid #C4B8A8;
+  color: #6B5C4C;
+}
+.market-badge.b2b { color: #2D5466; border-color: #B0C8D2; background: rgba(45,84,102,0.06); }
+.market-badge.consumer { color: #8C3A5E; border-color: #D8B5C4; background: rgba(140,58,94,0.06); }
+.entry-byline {
+  font-size: 11px;
+  color: #9C8A76;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.sep { color: #C4B8A8; }
+.entry-body {
+  font-size: 13px;
+  color: #4A3C2E;
+  line-height: 1.75;
+}
+.entry-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid #C4B8A8;
+  transition: border-color 0.15s;
+}
+.entry-link:hover { border-bottom-color: #B5724A; }
+
+/* ARCHIVE */
+.archive-masthead {
+  background: #F0EBE1;
+  padding: 32px 32px 0;
+  border-bottom: 0.5px solid #D4C8B8;
+}
+.archive-grid {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: #D4C8B8;
+}
+.archive-row {
+  background: #FAFAF8;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  gap: 12px;
+  transition: background 0.1s;
+}
+.archive-row:hover { background: #F0EBE1; }
+.archive-date {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  font-weight: bold;
+  color: #221A12;
+}
+.archive-meta { font-size: 11px; color: #9C8A76; margin-top: 3px; }
+.archive-arrow { color: #B5724A; font-size: 16px; }
+
+/* SOURCE SUBMISSION */
+.sources-wrap { padding: 32px; max-width: 540px; }
+.sources-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 26px;
+  font-weight: bold;
+  color: #221A12;
+  margin-bottom: 6px;
+}
+.sources-sub {
+  font-size: 12px;
+  color: #8C7B68;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+.form-group { margin-bottom: 16px; }
+.form-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8C7B68;
+  display: block;
+  margin-bottom: 6px;
+}
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 0.5px solid #C4B8A8;
+  border-radius: 6px;
+  background: #F0EBE1;
+  font-size: 13px;
+  color: #2A1F14;
+  font-family: inherit;
+}
+.form-textarea { min-height: 80px; resize: vertical; line-height: 1.6; }
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: #B5724A;
+}
+.submit-btn {
+  background: #221A12;
+  color: #F0EBE1;
+  border: none;
+  padding: 11px 26px;
+  border-radius: 6px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+}
+.submit-btn:hover { background: #3D3028; }
+.success-msg {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 11px;
+  color: #7A6A58;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.pending-list { margin-top: 36px; }
+.pending-title {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #B5724A;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid #D4C8B8;
+}
+.pending-item { padding: 10px 0; border-bottom: 0.5px solid #E8E0D4; }
+.pending-item-name { font-size: 12px; color: #3D3028; }
+.pending-item-url { font-size: 11px; color: #B5724A; margin-top: 2px; word-break: break-all; }
+.pending-item-note { font-size: 11px; color: #9C8A76; margin-top: 2px; }
+.pending-type-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #9C8A76; padding: 14px 0 6px; }
+
+/* UTILS */
+.loading { padding: 48px 32px; font-size: 13px; color: #9C8A76; text-align: center; }
+.empty { padding: 40px 0; font-size: 13px; color: #9C8A76; font-style: italic; }
+.search-header {
+  font-size: 11px;
+  color: #9C8A76;
+  padding: 18px 0 14px;
+  border-bottom: 0.5px solid #D4C8B8;
+}
+.search-entry-edition {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B5724A;
+  padding-top: 20px;
+  margin-bottom: -6px;
+}
+mark {
+  background: rgba(181,114,74,0.2);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-logo">Slauson Scoop</div>
+  <button class="nav-tab active" onclick="showTab('edition')">This Week</button>
+  <button class="nav-tab" onclick="showTab('archive')">Archive</button>
+  <button class="nav-tab" onclick="showTab('sources')">Submit Source</button>
+</nav>
+
+<!-- THIS WEEK VIEW -->
+<div id="view-edition">
+  <div class="masthead">
+    <div class="mast-eyebrow">Slauson &amp; Co. &nbsp;·&nbsp; US early-stage deals</div>
+    <div class="pub-name">Slauson Scoop</div>
+    <hr class="mast-rule">
+    <div class="mast-bottom">
+      <div class="mast-tagline">Pre-seed, Seed &amp; Series A</div>
+      <div class="mast-date" id="edition-date-header"></div>
+    </div>
+  </div>
+  <div class="lede">
+    <div class="lede-text" id="lede-text">Loading this week's deals…</div>
+    <div class="lede-stats" id="lede-stats"></div>
+  </div>
+  <div class="controls">
+    <button class="pill active" data-stage="All" onclick="filterStage('All',this)">All</button>
+    <button class="pill" data-stage="Pre-Seed" onclick="filterStage('Pre-Seed',this)">Pre-Seed</button>
+    <button class="pill" data-stage="Seed" onclick="filterStage('Seed',this)">Seed</button>
+    <button class="pill" data-stage="Series A" onclick="filterStage('Series A',this)">Series A</button>
+    <button class="pill" data-stage="Growth" onclick="filterStage('Growth',this)">Growth</button>
+    <button class="pill" data-stage="M&A" onclick="filterStage('M&A',this)">M&amp;A</button>
+    <span class="pill-divider" aria-hidden="true"></span>
+    <button class="pill market" data-market="B2B" onclick="filterMarket('B2B',this)">B2B</button>
+    <button class="pill market" data-market="Consumer" onclick="filterMarket('Consumer',this)">Consumer</button>
+    <input class="search-input" type="text" id="search-main" placeholder="Search all editions…" oninput="handleSearch(this.value)">
+  </div>
+  <div class="deals-body" id="deals-body">
+    <div class="loading">Fetching deals…</div>
+  </div>
+</div>
+
+<!-- ARCHIVE VIEW -->
+<div id="view-archive" style="display:none">
+  <div class="masthead">
+    <div class="mast-eyebrow">Slauson &amp; Co. &nbsp;·&nbsp; US early-stage deals</div>
+    <div class="pub-name">Slauson Scoop</div>
+    <hr class="mast-rule">
+    <div class="mast-bottom">
+      <div class="mast-tagline">Archive</div>
+      <div class="mast-date" id="archive-count"></div>
+    </div>
+  </div>
+  <div id="archive-list" class="archive-grid"></div>
+</div>
+
+<!-- SOURCES VIEW -->
+<div id="view-sources" style="display:none">
+  <div class="masthead">
+    <div class="mast-eyebrow">Slauson &amp; Co. &nbsp;·&nbsp; US early-stage deals</div>
+    <div class="pub-name">Slauson Scoop</div>
+    <hr class="mast-rule">
+    <div class="mast-bottom">
+      <div class="mast-tagline">Submit a Source</div>
+    </div>
+  </div>
+  <div class="sources-wrap">
+    <div class="sources-title">Suggest a source</div>
+    <div class="sources-sub">Know a newsletter, blog, or site surfacing US early-stage deals we might be missing? Drop it here and we'll review it before the next scan.</div>
+    <form onsubmit="submitSource(event)">
+      <div class="form-group">
+        <label class="form-label">URL</label>
+        <input class="form-input" type="text" id="src-url" placeholder="https://…" required>
+      </div>
+      <button class="submit-btn" type="submit">Submit</button>
+      <span class="success-msg" id="success-msg">Saved — picks up next Monday.</span>
+    </form>
+    <div class="pending-list" id="pending-list"></div>
+  </div>
+</div>
+
+<script>
+const NOTION_TOOL = 'mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-query-database-view';
+const SEED_DATA = [
+  {"Company":"Standard Intelligence","Stage":"Series A","Amount (M)":75,"City":"San Francisco","State":"CA","Investors":"Spark Capital + Sequoia (lead); Andrej Karpathy, Stanley Druckenmiller (angels)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Built FDM-1, an AI computer-use model trained on video instead of screenshots so it can actually see and navigate software the way a human does. Andrej Karpathy and Stanley Druckenmiller are angels."},
+  {"Company":"Manifest OS","Stage":"Series A","Amount (M)":60,"City":"San Francisco","State":"CA","Investors":"Menlo Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"AI-native law firm OS powering the Manifest Law brand with fixed-fee pricing and AI-driven legal ops — ends the billable hour, starting with business immigration. Largest Series A in legal tech history."},
+  {"Company":"OpenLight","Stage":"Series A","Amount (M)":50,"City":"Goleta","State":"CA","Investors":"Matter Venture Partners (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Silicon photonics chip company building PASIC designs for AI data centers, telecom, and high-bandwidth applications; brings total raised to $84M."},
+  {"Company":"Axoft","Stage":"Series A","Amount (M)":55,"City":"Cambridge","State":"MA","Investors":"C.P. Group Innovation (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Implantable neurotechnology designed to interface with the nervous system at scale, targeting neurological disorders where existing devices fall short."},
+  {"Company":"Fathom Therapeutics","Stage":"Series A","Amount (M)":47,"City":"New York","State":"NY","Investors":"Sutter Hill Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"AI + quantum chemistry drug design platform that simulates protein dynamics at atomic resolution to target undruggable molecules; formerly known as Atommap."},
+  {"Company":"Golden Child","Stage":"Series A","Amount (M)":37,"City":"San Francisco","State":"CA","Investors":"Redpoint Ventures (lead); Jack Abraham (co-founder/angel)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"High-end fresh dog food system from the ex-Hims & Hers team (Jack Abraham co-founded); science-backed DTC frozen meals + a liquid drizzle topper built to human food standards."},
+  {"Company":"Featherless AI","Stage":"Series A","Amount (M)":20,"City":"San Francisco","State":"CA","Investors":"AMD Ventures + Airbus Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Serverless inference platform running 30,000+ open-source AI models as a neutral infrastructure layer for the AI ecosystem."},
+  {"Company":"Clarasight","Stage":"Series A","Amount (M)":11.5,"City":"New York","State":"NY","Investors":"AlleyCorp (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"AI platform unifying fragmented corporate travel & expense data into a real-time model for enterprise cost savings; manages data from $5B+ in T&E spend."},
+  {"Company":"definity","Stage":"Series A","Amount (M)":12,"City":"Chicago","State":"IL","Investors":"GreatPoint Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Agentic data engineering platform that lets enterprise teams build and deploy data pipelines without deep engineering overhead."},
+  {"Company":"OpenObserve","Stage":"Series A","Amount (M)":10,"City":"Menlo Park","State":"CA","Investors":"Nexus Venture Partners (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Open-source observability platform for logs, metrics, and traces — dramatically cheaper than Elasticsearch or Datadog."},
+  {"Company":"LighthouseAI","Stage":"Series A","Amount (M)":8,"City":"Los Angeles","State":"CA","Investors":"Boxcars Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"AI compliance platform helping pharma companies manage state licensing and regulatory requirements across the supply chain."},
+  {"Company":"Lumicup","Stage":"Series A","Amount (M)":4.38,"City":"Los Angeles","State":"CA","Investors":"Hydra Group / Mordun Capital (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Endlessly recyclable aluminum cup that keeps drinks cold 70% longer; expanding from 1 to 5 SKUs and scaling manufacturing 10x."},
+  {"Company":"Crazy Mountain","Stage":"Seed","Amount (M)":15,"City":"Los Angeles","State":"CA","Investors":"CAVU Consumer Partners (lead); George Clooney, Rande Gerber, Mike Meldman (founders)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Non-alcoholic beer brand co-founded by George Clooney, Rande Gerber, and Mike Meldman; two SKUs rolling out nationally."},
+  {"Company":"SkyfireAI","Stage":"Seed","Amount (M)":11,"City":"Huntsville","State":"AL","Investors":"Mucker Capital (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"AI-native platform for coordinating autonomous multi-drone fleets for first responders and defense; founded by Navy, intel community, and DARPA vets."},
+  {"Company":"General Analysis","Stage":"Seed","Amount (M)":10,"City":"San Francisco","State":"CA","Investors":"Altos Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Security layer for AI agents that detects and blocks prompt injection, data exfiltration, and other threats unique to autonomous AI workflows."},
+  {"Company":"Illuminant Surgical","Stage":"Seed","Amount (M)":8.4,"City":"Los Angeles","State":"CA","Investors":"Wing 2 Wing Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Skylight system projects a patient's internal imaging directly onto their body during surgery so surgeons can see and navigate in real time without looking away."},
+  {"Company":"Shapes.inc","Stage":"Seed","Amount (M)":8,"City":"San Francisco","State":"CA","Investors":"Lightspeed (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"The only app where you can talk to AI with friends — users create AI characters that join real group chats; 400K+ MAUs with 13M+ engaged minutes in March."},
+  {"Company":"Chord","Stage":"Seed","Amount (M)":7,"City":"New York","State":"NY","Investors":"Equal Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"From the ex-Glossier team — AI context layer that unifies a retail brand's data, rules, and operating logic into one place; serving $1B+ in aggregate customer revenue."},
+  {"Company":"Blomma","Stage":"Seed","Amount (M)":5,"City":"San Francisco","State":"CA","Investors":"Felicis Ventures (lead)","Market":"Consumer","Women-Founded":"__YES__","date:Edition Date:start":"2026-04-27","Description":"AI career coach at $25/month built by Silvia Oviedo Lopez (ex-Pinterest, Canva) — puts executive-level coaching within reach for every worker, not just the C-suite."},
+  {"Company":"Kibu","Stage":"Seed","Amount (M)":10.5,"City":"Washington","State":"DC","Investors":"Cubit Capital + Construct Capital (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Trust and identity verification network combating deepfakes; already deployed in financial services, security consulting, and government."},
+  {"Company":"TIES","Stage":"Seed","Amount (M)":1.5,"City":"Austin","State":"TX","Investors":"HumanCo (lead); Camryn and Luke Novak (co-founders)","Market":"Consumer","Women-Founded":"__YES__","date:Edition Date:start":"2026-04-27","Description":"Men's preconception fertility supplement co-founded by Camryn and Luke Novak, targeting the missing male side of family planning."},
+  {"Company":"Jupid","Stage":"Pre-Seed","Amount (M)":0.84,"City":"Los Angeles","State":"CA","Investors":"Pre-Seed to Succeed (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"AI-native bookkeeping, tax, and compliance platform that embeds directly inside banking products as an automated accountant for small businesses."},
+  {"Company":"True Anomaly","Stage":"Growth","Amount (M)":650,"City":"Denver","State":"CO","Investors":"Eclipse + Riot Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Space defense startup building autonomous spacecraft and software for national security missions in orbit; $1B raised total since 2022 founding, valued at ~$2.2B. Golden Dome program contractor."},
+  {"Company":"Sniffies","Stage":"M&A","Amount (M)":100,"City":"Seattle","State":"WA","Investors":"Match Group (strategic, lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-27","Description":"Match Group invested $100M in Sniffies, a location-based cruising platform for GBTQ men with 3M MAUs — with an option to acquire outright, mirroring the playbook Match used to buy Hinge."},
+  {"Company":"Reliable Robotics","Stage":"Growth","Amount (M)":160,"City":"Mountain View","State":"CA","Investors":"Undisclosed (lead); UP Partners, Calm Ventures","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"Autonomous aviation company advancing pilotless flight for cargo and passenger aircraft; UP Partners and Calm Ventures participated in the round."},
+  {"Company":"Sooth Labs","Stage":"Seed","Amount (M)":50,"City":"Pittsburgh","State":"PA","Investors":"Felicis Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"AI lab building predictive models for geopolitical and market event forecasting using multimodal data; targets finance, defense, and insurance."},
+  {"Company":"Monk","Stage":"Series A","Amount (M)":25,"City":"New York","State":"NY","Investors":"Footwork + Acrew Capital (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"AI-native accounts receivable platform that automates the full contract-to-cash lifecycle, cutting DSO by 40% for B2B finance teams."},
+  {"Company":"Amperos Health","Stage":"Series A","Amount (M)":16,"City":"New York","State":"NY","Investors":"Bessemer Venture Partners (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"AI-native denial management and revenue recovery platform for healthcare providers; already recovering ~$700M/year in claims across 3,000+ clinical sites."},
+  {"Company":"C-Infinity","Stage":"Seed","Amount (M)":16,"City":"Mountain View","State":"CA","Investors":"Canaan Partners (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"AI platform that translates digital designs into production-ready manufacturing plans, cutting the bottleneck between engineering and the factory floor."},
+  {"Company":"Zócalo Health","Stage":"Series A","Amount (M)":15,"City":"Kenmore","State":"WA","Investors":".406 Ventures (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"Tech-enabled, community-based primary care for high-need Latino populations, expanding into MD, NY, and D.C. with deep Medicaid partnerships. POC-founded."},
+  {"Company":"Blackstar","Stage":"Seed","Amount (M)":12,"City":"San Francisco","State":"CA","Investors":"Abstract (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"Building a new AI-native computing device and OS designed to reinvent how humans interact with AI, from the hardware up."},
+  {"Company":"Crewline AI","Stage":"Seed","Amount (M)":7.1,"City":"San Francisco","State":"CA","Investors":"Initialized Capital + Nebular (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"Autonomous retrofit stack for vibratory rollers and construction equipment, doubling productive site hours in early deployments."},
+  {"Company":"Schematic","Stage":"Seed","Amount (M)":6.5,"City":"Boulder","State":"CO","Investors":"S3 Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"Runtime monetization and entitlement infrastructure for SaaS and AI companies, integrating directly with Stripe."},
+  {"Company":"Series","Stage":"Pre-Seed","Amount (M)":5.1,"City":"New Haven","State":"CT","Investors":"Undisclosed (lead); founded by Nathaneo Johnson and Sean Hargrow","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-20","Description":"AI-powered social network built entirely inside iMessage; users text to get matched with curated connections. POC-founded by Nathaneo Johnson and Sean Hargrow."},
+  {"Company":"Hermeus","Stage":"Growth","Amount (M)":350,"City":"Atlanta","State":"GA","Investors":"Khosla Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Defense aviation startup building hypersonic aircraft for the US government and commercial markets; $350M Series C positions it for production scale."},
+  {"Company":"Slate Auto","Stage":"Growth","Amount (M)":650,"City":"Warsaw","State":"IN","Investors":"TWG Global (lead); Slauson & Co. (participant); Bezos Expeditions (backer)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Bezos-backed EV startup targeting a sub-$30K modular pickup truck — 160,000+ reservations, $400M factory in Indiana, production starting late 2026. Slauson & Co. participated."},
+  {"Company":"Lucid","Stage":"Growth","Amount (M)":750,"City":"Newark","State":"CA","Investors":"Saudi PIF's Ayar Third Investment (lead, $550M); Uber ($200M common stock)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Luxury EV manufacturer raised a growth round as it scales manufacturing and autonomous driving platform; Saudi PIF led with $550M, Uber invested $200M in common stock."},
+  {"Company":"Glydways","Stage":"Growth","Amount (M)":170,"City":"San Francisco","State":"CA","Investors":"Suzuki Motor + ACS Group + Khosla Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Autonomous robocar transit networks for cities and campuses, oversubscribed at ~$700M valuation with a $1B+ follow-on reportedly in talks."},
+  {"Company":"Chapter","Stage":"Growth","Amount (M)":100,"City":"New York","State":"NY","Investors":"Generation Investment Management (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"AI-powered Medicare navigation platform that crossed $100M ARR — helps seniors find personalized, unbiased coverage guidance. Series E."},
+  {"Company":"ONTO Health","Stage":"Series A","Amount (M)":20,"City":"Chicago","State":"IL","Investors":"ARTIS + Humania (lead); Dr. Roohi Jeelani (founder)","Market":"Consumer","Women-Founded":"__YES__","date:Edition Date:start":"2026-04-13","Description":"AI-enabled, physician-led fertility and longevity platform founded by Dr. Roohi Jeelani; combining IVF care with longevity science, now expanding into the Gulf region."},
+  {"Company":"SUJA Life","Stage":"M&A","Amount (M)":100,"City":"Oceanside","State":"CA","Investors":"Goldman Sachs + Jefferies (underwriters)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Organic cold-pressed juice brand filed for a $100M IPO; $327M in revenue and 26% YoY growth. Consumer beverage exit."},
+  {"Company":"Sedron Technologies","Stage":"M&A","Amount (M)":500,"City":"Sedro-Woolley","State":"WA","Investors":"Ara Partners (strategic, lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Waste upcycling infrastructure company secured up to $500M strategic investment from Ara Partners to scale operations across North America. Energy/circular economy."},
+  {"Company":"Finnish Long Drink","Stage":"M&A","Amount (M)":null,"City":"New York","State":"NY","Investors":"Mark Anthony Group (acquirer); Miles Teller, Rickie Fowler, Kygo (celebrity backers)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Celebrity-backed RTD brand (Miles Teller, Rickie Fowler, Kygo) acquired by White Claw parent Mark Anthony Group. Amount undisclosed. Classic roll-up in the RTD space."},
+  {"Company":"Sygaldry Technologies","Stage":"Series A","Amount (M)":105,"City":"Ann Arbor","State":"MI","Investors":"Undisclosed (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Quantum-accelerated AI server infrastructure that pairs quantum co-processors with enterprise compute for high-value scientific workloads."},
+  {"Company":"Pillar","Stage":"Seed","Amount (M)":20,"City":"New York","State":"NY","Investors":"a16z (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"AI that parses contracts, ERPs, and messaging apps to manage real-time commodity price risk across metals, food, and airlines."},
+  {"Company":"Hilbert","Stage":"Series A","Amount (M)":28,"City":"San Francisco","State":"CA","Investors":"a16z (lead); Walmart (customer/strategic)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Agentic AI analytics that automates pricing, promotions, and marketing spend for consumer companies; Walmart is already a customer."},
+  {"Company":"HYFIX","Stage":"Seed","Amount (M)":15,"City":"Santa Clara","State":"CA","Investors":"Craft Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"US-made integrated SoC chip for drones and autonomous robots, built as a domestic alternative to DJI's hardware stack."},
+  {"Company":"Critical Loop","Stage":"Series A","Amount (M)":26,"City":"Los Angeles","State":"CA","Investors":"Conifer Infrastructure Partners + Hanover (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Modular microgrids that let industrial sites and data centers bypass multi-year grid queues and get power online in days."},
+  {"Company":"Primepoint","Stage":"Seed","Amount (M)":10,"City":"San Mateo","State":"CA","Investors":"Navitas Capital (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"AI that reads and understands complex construction drawings to streamline workflows for large commercial contractors."},
+  {"Company":"Phonely","Stage":"Series A","Amount (M)":16,"City":"San Francisco","State":"CA","Investors":"Base10 Partners (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"AI voice platform for inbound calls that books 20% more appointments than human reps at 80% lower cost."},
+  {"Company":"Prefix","Stage":"Seed","Amount (M)":7.5,"City":"New York","State":"NY","Investors":"Collide Capital + Slow Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"AI-powered facility management for multisite restaurant and retail operators, serving nearly 2,000 locations."},
+  {"Company":"Osteoboost","Stage":"Series A","Amount (M)":8,"City":"Redwood City","State":"CA","Investors":"Ambit Health Ventures (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"FDA-cleared prescription wearable for bone density in postmenopausal women with osteopenia, proven to slow bone loss by 85% in the spine."},
+  {"Company":"Wavelet Medical","Stage":"Seed","Amount (M)":7,"City":"New Haven","State":"CT","Investors":"Aegis Ventures (lead); Yale, LA General/USC (pilot partners)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"First non-invasive AI-powered fetal brain EEG monitoring platform for labor and delivery; Yale spinout, piloting at Yale and LA General/USC."},
+  {"Company":"Protocole","Stage":"Seed","Amount (M)":6,"City":"New York","State":"NY","Investors":"Rare Capital (lead); Delphine Le Grand and Cindy Yan (co-founders)","Market":"Consumer","Women-Founded":"__YES__","date:Edition Date:start":"2026-04-13","Description":"Physician-guided peptide therapy platform on FDA-registered compounding, co-founded by Delphine Le Grand and Cindy Yan."},
+  {"Company":"Flora Fertility","Stage":"Seed","Amount (M)":5,"City":"Chicago","State":"IL","Investors":"ManchesterStory (lead); Slauson & Co. (participant)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"First individually-owned fertility insurance, policies starting at $20/month. Slauson & Co. participated in round."},
+  {"Company":"Uplane","Stage":"Seed","Amount (M)":4.5,"City":"San Francisco","State":"CA","Investors":"Play Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"AI that replaces marketing agencies by automating ad creation, testing, and budget optimization."},
+  {"Company":"Sage Haven","Stage":"Pre-Seed","Amount (M)":3,"City":"San Francisco","State":"CA","Investors":"Hustle Fund + How Women Invest (lead); Kate Doerksen and Anne Pizzuti (co-founders)","Market":"Consumer","Women-Founded":"__YES__","date:Edition Date:start":"2026-04-13","Description":"AI-moderated messaging and calling app for kids that blocks harmful content in real time, co-founded by sisters Kate Doerksen and Anne Pizzuti."},
+  {"Company":"Orbital","Stage":"Pre-Seed","Amount (M)":null,"City":"Los Angeles","State":"CA","Investors":"a16z Speedrun (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-04-13","Description":"Building AI data centers in low-Earth orbit; first test mission on SpaceX Falcon 9 planned for April 2027. Amount undisclosed."},
+  {"Company":"Fazeshift","Stage":"Series A","Amount (M)":17,"City":"San Francisco","State":"CA","Investors":"F-Prime Capital (lead); Gradient Ventures, Y Combinator, Wayfinder Ventures, Pioneer Fund, Ritual Capital","Market":"B2B","Women-Founded":"__YES__","date:Edition Date:start":"2026-05-04","Description":"AI agents automating the full accounts receivable cycle across invoicing, collections, and payment reconciliation; 12x revenue growth in one year with unicorn and public company customers."},
+  {"Company":"MOSH","Stage":"Series A","Amount (M)":13,"City":"Los Angeles","State":"CA","Investors":"Main Street Advisors (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Brain health nutrition brand co-founded by Maria Shriver and Patrick Schwarzenegger, expanding nationally across grocery retail including an upcoming Target launch."},
+  {"Company":"Jesse & Ben's","Stage":"Series A","Amount (M)":10,"City":"Washington","State":"DC","Investors":"Greycroft (lead); Rich Products Ventures, Willow Growth Partners, Sling Ventures, Midnight Venture Partners, grt sht ventures","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Frozen seed-oil-free french fry brand made with beef tallow, expanding into national retail and foodservice distribution."},
+  {"Company":"Truentity Health","Stage":"Series A","Amount (M)":3.5,"City":"San Francisco","State":"CA","Investors":"Evidenced VC (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Pharmacy-led clinical care network scaling nationwide medication management and chronic condition programs."},
+  {"Company":"District","Stage":"Seed","Amount (M)":14.7,"City":"Los Angeles","State":"CA","Investors":"Undisclosed","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Platform helping independent sellers build community-driven marketplaces, founded by three Snap alumni."},
+  {"Company":"Village","Stage":"Seed","Amount (M)":9.5,"City":"Los Angeles","State":"CA","Investors":"Upfront Ventures (lead); Bling Capital, GTMFund, Perceptive Ventures","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"AI-powered specialty pediatric care coordination platform connecting families, providers, pediatricians, and payers for children with developmental and behavioral health needs."},
+  {"Company":"Moritz","Stage":"Seed","Amount (M)":9,"City":"San Francisco","State":"CA","Investors":"Y Combinator (lead); 20VC, Rebel Fund","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"AI-native law firm combining software and experienced attorneys to automate contract drafting and review; has handled $2B+ in contracts since launch."},
+  {"Company":"Altara","Stage":"Seed","Amount (M)":7,"City":"San Francisco","State":"CA","Investors":"Greylock (lead); Neo, BoxGroup, Liquid 2 Ventures; Jeff Dean (angel)","Market":"B2B","Women-Founded":"__YES__","date:Edition Date:start":"2026-05-04","Description":"AI platform that unifies fragmented R&D data for physical sciences companies (batteries, semiconductors, medical devices), compressing failure analysis from weeks to minutes."},
+  {"Company":"Spring Labs","Stage":"Seed","Amount (M)":5,"City":"Marina del Rey","State":"CA","Investors":"BankTech Ventures (lead); Haymaker Ventures","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"AI-native compliance platform building agents that automate complaint handling, dispute resolution, and compliance workflows for banks and fintechs."},
+  {"Company":"Corvera","Stage":"Seed","Amount (M)":4.2,"City":"San Francisco","State":"CA","Investors":"Rebel Fund; Y Combinator","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"AI-native supply chain platform automating back-office operations for CPG brands including order processing, invoicing, and demand planning."},
+  {"Company":"Thea","Stage":"Pre-Seed","Amount (M)":4,"City":"San Francisco","State":"CA","Investors":"General Catalyst (lead)","Market":"Consumer","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"AI doctor platform for aesthetics consultations and treatment guidance."},
+  {"Company":"Blitzy","Stage":"Series A","Amount (M)":200,"City":"Cambridge","State":"MA","Investors":"Northzone (lead); PSG, Battery Ventures, Jump Capital, Morgan Creek Digital, Defiant","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Autonomous enterprise software development platform that lets teams ship production code at 10x speed using AI agents that write, test, and deploy code end-to-end."},
+  {"Company":"CopilotKit","Stage":"Series A","Amount (M)":27,"City":"Seattle","State":"WA","Investors":"Glilot Capital (lead); NFX, SignalFire","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Open standard (AG-UI) and enterprise platform for embedding app-native AI agents directly into existing software; adopted by Google, Microsoft, Amazon, and Oracle with Fortune 500 penetration."},
+  {"Company":"RadixArk","Stage":"Seed","Amount (M)":100,"City":"Palo Alto","State":"CA","Investors":"Accel + Spark Capital (lead); NVentures","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"AI infrastructure company building next-generation compute and inference solutions for the AI ecosystem."},
+  {"Company":"XCaliber Health","Stage":"Seed","Amount (M)":6.5,"City":"Andover","State":"MA","Investors":"ManchesterStory (lead); Benhamou Global Ventures, Arka Venture Labs","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Agentic AI platform designed to reduce administrative burden in healthcare, automating prior auth, coding, and clinical documentation workflows."},
+  {"Company":"Astrada","Stage":"Seed","Amount (M)":3.8,"City":"San Francisco","State":"CA","Investors":"Bain Capital Ventures, QED Investors, Nyca Partners (lead)","Market":"B2B","Women-Founded":"__NO__","date:Edition Date:start":"2026-05-04","Description":"Data layer for autonomous finance that unifies payment, transaction, and financial operations data in real time for enterprise teams."}
+];
+const VIEW_URL = 'https://www.notion.so/658535f7f89a410c9cadc68752a0854c?v=72f6036a4bbb410ca6b2af43d5617dc2';
+const SOURCES_VIEW_URL = 'https://www.notion.so/7247150cc3ad4c3a8e4673c39773e0a8?v=0126c5ef-ca60-4484-a6d0-c1e9fd9fdc3a';
+const SOURCES_DS_ID = '123a6e01-aa1f-43fe-9c61-8411df87020f';
+const NOTION_CREATE = 'mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-create-pages';
+const STAGE_ORDER = ['Pre-Seed','Seed','Series A','Growth','M&A'];
+
+let allDeals = [];
+let currentEdition = null;
+let currentStage = 'All';
+let currentMarket = null;
+let searching = false;
+
+// ── Tab nav ──────────────────────────────────────────
+function showTab(tab) {
+  ['edition','archive','sources'].forEach(t => {
+    document.getElementById('view-'+t).style.display = t===tab ? '' : 'none';
+  });
+  document.querySelectorAll('.nav-tab').forEach((el,i) => {
+    el.classList.toggle('active', ['edition','archive','sources'][i]===tab);
+  });
+  if (tab==='archive') renderArchive();
+  if (tab==='sources') renderSourceList();
+}
+
+// ── Data ─────────────────────────────────────────────
+async function loadDeals() {
+  processDeals(SEED_DATA, false);
+  try {
+    if (typeof window.cowork === 'undefined' || typeof window.cowork.callMcpTool !== 'function') return;
+    const data = await window.cowork.callMcpTool(NOTION_TOOL, { view_url: VIEW_URL });
+    if (data && data.results && data.results.length) {
+      processDeals(data.results, true);
+    }
+  } catch(e) {
+    // Seed data already showing — silently fail
+  }
+}
+
+function processDeals(results, live) {
+  allDeals = results.sort((a,b) => {
+    const da = a['date:Edition Date:start'] || '';
+    const db = b['date:Edition Date:start'] || '';
+    if (db !== da) return db.localeCompare(da);
+    return (b['Amount (M)']||0) - (a['Amount (M)']||0);
+  });
+  const editions = getEditions();
+  currentEdition = editions[0] || null;
+  if (currentEdition) renderEditionView(currentEdition, currentStage, currentMarket);
+  else document.getElementById('deals-body').innerHTML = '<div class="empty">No deals yet.</div>';
+  renderArchive();
+}
+
+function getEditions() {
+  return [...new Set(allDeals.map(d => d['date:Edition Date:start']))].sort((a,b) => b.localeCompare(a));
+}
+
+function getDealsForEdition(ed) {
+  return allDeals.filter(d => d['date:Edition Date:start'] === ed)
+    .sort((a,b) => (b['Amount (M)']||0)-(a['Amount (M)']||0));
+}
+
+function getInvestors(d) {
+  return d['Investors'] || d['Lead Investor'] || '';
+}
+
+// ── Format helpers ────────────────────────────────────
+function fmtDate(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+function fmtRange(iso) {
+  const s = new Date(iso+'T12:00:00');
+  const e = new Date(s); e.setDate(e.getDate()+6);
+  return s.toLocaleDateString('en-US',{month:'short',day:'numeric'})
+    +' – '+e.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+function fmtAmt(m) {
+  if (m===null||m===undefined) return '';
+  if (m < 1) return '$'+Math.round(m*1000)+'K';
+  if (m >= 1000) return '$'+(m/1000).toFixed(1).replace(/\.0$/,'')+'B';
+  return '$'+m+'M';
+}
+function fmtTotal(m) {
+  if (m >= 1000) return '$'+(m/1000).toFixed(1).replace(/\.0$/,'')+'B';
+  return '$'+Math.round(m)+'M';
+}
+function hl(text, term) {
+  if (!term||!text) return escHtml(text||'');
+  const e = term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return escHtml(text).replace(new RegExp('('+e+')','gi'),'<mark>$1</mark>');
+}
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Lede generator ───────────────────────────────────
+function buildLede(deals) {
+  const total = deals.reduce((s,d)=>s+(d['Amount (M)']||0),0);
+  const cities = {};
+  deals.forEach(d=>{ if(d.City) cities[d.City]=(cities[d.City]||0)+1; });
+  const topCity = Object.entries(cities).sort((a,b)=>b[1]-a[1])[0];
+  const wf = deals.filter(d=>d['Women-Founded']==='__YES__').length;
+  let t = `${deals.length} deal${deals.length!==1?'s':''}, ~${fmtTotal(total)} raised.`;
+  if (topCity && topCity[1]>=2) t += ` ${topCity[0]} had ${topCity[1]} deals this week.`;
+  if (wf) t += ` ${wf} women-founded.`;
+  return t;
+}
+function buildStats(deals) {
+  const total = deals.reduce((s,d)=>s+(d['Amount (M)']||0),0);
+  const wf = deals.filter(d=>d['Women-Founded']==='__YES__').length;
+  const b2b = deals.filter(d=>d.Market==='B2B').length;
+  const consumer = deals.filter(d=>d.Market==='Consumer').length;
+  let h = `<div class="lede-stat"><strong>${deals.length}</strong>deals</div>
+            <div class="lede-stat"><strong>${fmtTotal(total)}</strong>raised</div>`;
+  STAGE_ORDER.forEach(s=>{
+    const n = deals.filter(d=>d.Stage===s).length;
+    if (n) h += `<div class="lede-stat"><strong>${n}</strong>${s}</div>`;
+  });
+  if (b2b) h += `<div class="lede-stat"><strong>${b2b}</strong>B2B</div>`;
+  if (consumer) h += `<div class="lede-stat"><strong>${consumer}</strong>Consumer</div>`;
+  if (wf) h += `<div class="lede-stat"><strong>${wf}</strong>women-founded</div>`;
+  return h;
+}
+
+// ── Entry HTML ───────────────────────────────────────
+function dealSearchUrl(d) {
+  const q = [d.Company, fmtAmt(d['Amount (M)']), 'funding'].filter(Boolean).join(' ');
+  return 'https://news.google.com/search?q=' + encodeURIComponent(q);
+}
+
+function entryHTML(d, term) {
+  const loc = [d.City, d.State].filter(Boolean).join(', ');
+  const wf = d['Women-Founded']==='__YES__' ? '<span class="women-badge">✦ women-founded</span>' : '';
+  const market = d.Market;
+  const marketBadge = market
+    ? `<span class="market-badge ${market.toLowerCase()}">${escHtml(market)}</span>`
+    : '';
+  const inv = getInvestors(d);
+  const url = d['Source URL'] || dealSearchUrl(d);
+  const nameLinked = `<a href="${escHtml(url)}" class="entry-link" target="_blank" rel="noopener">${hl(d.Company||'',term)}</a>`;
+  return `<div class="entry">
+    <div class="entry-header">
+      <div class="entry-name">${nameLinked}</div>
+      <div class="entry-amount">${escHtml(fmtAmt(d['Amount (M)']))}</div>
+      ${marketBadge}
+      ${wf}
+    </div>
+    <div class="entry-byline">
+      ${escHtml(loc)}
+      ${inv ? `<span class="sep">·</span>${hl(inv,term)}` : ''}
+      <span class="sep">·</span>${escHtml(fmtDate(d['date:Edition Date:start']))}
+    </div>
+    <div class="entry-body">${hl(d.Description||'',term)}</div>
+  </div>`;
+}
+
+// ── Render edition view ───────────────────────────────
+function renderEditionView(ed, stage, market) {
+  const allEd = getDealsForEdition(ed);
+  let filtered = stage==='All' ? allEd : allEd.filter(d=>d.Stage===stage);
+  if (market) filtered = filtered.filter(d=>d.Market===market);
+
+  document.getElementById('edition-date-header').textContent = fmtRange(ed);
+  document.getElementById('lede-text').textContent = buildLede(allEd);
+  document.getElementById('lede-stats').innerHTML = buildStats(allEd);
+
+  const grouped = {};
+  filtered.forEach(d=>{ (grouped[d.Stage]=grouped[d.Stage]||[]).push(d); });
+
+  let html = '';
+  STAGE_ORDER.filter(s=>grouped[s]?.length).forEach(s=>{
+    const n = grouped[s].length;
+    html += `<div class="section-label">${escHtml(s)}<span class="section-count">${n} deal${n!==1?'s':''}</span></div>`;
+    grouped[s].forEach(d=>{ html += entryHTML(d, ''); });
+  });
+
+  document.getElementById('deals-body').innerHTML = html || '<div class="empty">No deals match this filter.</div>';
+}
+
+// ── Stage filter ──────────────────────────────────────
+function filterStage(stage, btn) {
+  currentStage = stage;
+  document.querySelectorAll('.controls .pill[data-stage]').forEach(el=>el.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('search-main').value = '';
+  searching = false;
+  if (currentEdition) renderEditionView(currentEdition, stage, currentMarket);
+}
+
+// ── Market filter ─────────────────────────────────────
+function filterMarket(market, btn) {
+  if (currentMarket === market) {
+    currentMarket = null;
+    btn.classList.remove('active');
+  } else {
+    currentMarket = market;
+    document.querySelectorAll('.controls .pill[data-market]').forEach(el=>el.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  document.getElementById('search-main').value = '';
+  searching = false;
+  if (currentEdition) renderEditionView(currentEdition, currentStage, currentMarket);
+}
+
+// ── Search ────────────────────────────────────────────
+function handleSearch(val) {
+  const q = val.trim();
+  if (!q) {
+    searching = false;
+    currentStage = 'All';
+    currentMarket = null;
+    document.querySelectorAll('.controls .pill[data-stage]').forEach((el,i)=>el.classList.toggle('active', el.dataset.stage==='All'));
+    document.querySelectorAll('.controls .pill[data-market]').forEach(el=>el.classList.remove('active'));
+    if (currentEdition) renderEditionView(currentEdition, 'All', null);
+    return;
+  }
+  searching = true;
+  const ql = q.toLowerCase();
+  const matches = allDeals.filter(d =>
+    [d.Company,d.Description,getInvestors(d),d.City,d.Stage,d.State,d.Market]
+      .some(f=>f&&String(f).toLowerCase().includes(ql))
+  );
+
+  let html = `<div class="search-header">${matches.length} result${matches.length!==1?'s':''} for &ldquo;${escHtml(q)}&rdquo; across all editions</div>`;
+  if (!matches.length) {
+    html += '<div class="empty">No deals found.</div>';
+  } else {
+    let lastEd = null;
+    matches.forEach(d => {
+      const ed = d['date:Edition Date:start'];
+      if (ed !== lastEd) {
+        html += `<div class="search-entry-edition">Week of ${escHtml(fmtRange(ed))}</div>`;
+        lastEd = ed;
+      }
+      html += entryHTML(d, q);
+    });
+  }
+  document.getElementById('deals-body').innerHTML = html;
+}
+
+// ── Archive ───────────────────────────────────────────
+function renderArchive() {
+  const editions = getEditions();
+  document.getElementById('archive-count').textContent = `${editions.length} edition${editions.length!==1?'s':''}`;
+  if (!editions.length) {
+    document.getElementById('archive-list').innerHTML = '<div class="loading">No editions yet.</div>';
+    return;
+  }
+  document.getElementById('archive-list').innerHTML = editions.map(ed => {
+    const deals = getDealsForEdition(ed);
+    const total = deals.reduce((s,d)=>s+(d['Amount (M)']||0),0);
+    return `<div class="archive-row" onclick="goToEdition('${ed}')">
+      <div>
+        <div class="archive-date">${escHtml(fmtRange(ed))}</div>
+        <div class="archive-meta">${deals.length} deals &nbsp;·&nbsp; ~${fmtTotal(total)} raised</div>
+      </div>
+      <div class="archive-arrow">→</div>
+    </div>`;
+  }).join('');
+}
+
+function goToEdition(ed) {
+  currentEdition = ed;
+  currentStage = 'All';
+  currentMarket = null;
+  document.getElementById('search-main').value = '';
+  searching = false;
+  document.querySelectorAll('.controls .pill[data-stage]').forEach(el=>el.classList.toggle('active', el.dataset.stage==='All'));
+  document.querySelectorAll('.controls .pill[data-market]').forEach(el=>el.classList.remove('active'));
+  showTab('edition');
+  renderEditionView(ed, 'All', null);
+}
+
+// ── Source submission ─────────────────────────────────
+function nameFromUrl(raw) {
+  try {
+    const u = new URL(raw.startsWith('http') ? raw : 'https://'+raw);
+    return u.hostname.replace(/^www\./,'');
+  } catch(e) { return raw; }
+}
+
+async function submitSource(e) {
+  e.preventDefault();
+  const url = document.getElementById('src-url').value.trim();
+  if (!url) return;
+
+  const name = nameFromUrl(url);
+  const btn = e.target.querySelector('.submit-btn');
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    await window.cowork.callMcpTool(NOTION_CREATE, {
+      parent: { type: 'data_source_id', data_source_id: SOURCES_DS_ID },
+      pages: [{ properties: {
+        'Name': name,
+        'userDefined:URL': url.startsWith('http') ? url : 'https://'+url,
+        'Email': '',
+        'Type': 'Website',
+        'Notes': 'Submitted via Slauson Scoop',
+        'Active': '__YES__',
+        'date:Date Added:start': today
+      }}]
+    });
+    document.getElementById('src-url').value = '';
+    const msg = document.getElementById('success-msg');
+    msg.style.opacity = 1;
+    setTimeout(()=>{ msg.style.opacity=0; }, 3000);
+    renderSourceList();
+  } catch(err) {
+    alert('Could not save — check Notion connection.');
+  } finally {
+    btn.textContent = 'Submit';
+    btn.disabled = false;
+  }
+}
+
+async function renderSourceList() {
+  const el = document.getElementById('pending-list');
+  el.innerHTML = '<div class="pending-title">Loading current sources…</div>';
+  try {
+    const data = await window.cowork.callMcpTool(NOTION_TOOL, { view_url: SOURCES_VIEW_URL });
+    const sources = (data.results || []).filter(s => s.Active === '__YES__')
+      .sort((a,b) => (a.Type||'').localeCompare(b.Type||'') || (a.Name||'').localeCompare(b.Name||''));
+    if (!sources.length) { el.innerHTML = ''; return; }
+    const byType = {};
+    sources.forEach(s => { (byType[s.Type||'Other'] = byType[s.Type||'Other']||[]).push(s); });
+    let html = `<div class="pending-title">Currently scanning (${sources.length} sources)</div>`;
+    ['Newsletter','Website','RSS Feed','Other'].filter(t=>byType[t]).forEach(t => {
+      html += `<div class="pending-type-label">${escHtml(t)}s</div>`;
+      byType[t].forEach(s => {
+        html += `<div class="pending-item">
+          <div class="pending-item-name">${escHtml(s.Name||'')}</div>
+          <div class="pending-item-url">${escHtml(s['userDefined:URL']||s.Email||'')}</div>
+          ${s.Notes?`<div class="pending-item-note">${escHtml(s.Notes)}</div>`:''}
+        </div>`;
+      });
+    });
+    el.innerHTML = html;
+  } catch(err) {
+    el.innerHTML = '<div class="pending-title">Could not load sources.</div>';
+  }
+}
+
+// ── Init ──────────────────────────────────────────────
+loadDeals();
+</script>
+</body>
+</html>
