@@ -648,8 +648,8 @@ function fmtDate(iso) {
   return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
 function fmtRange(iso) {
-  const s = new Date(iso+'T12:00:00');
-  const e = new Date(s); e.setDate(e.getDate()+6);
+  const e = new Date(iso+'T12:00:00');
+  const s = new Date(e); s.setDate(s.getDate()-6);
   return s.toLocaleDateString('en-US',{month:'short',day:'numeric'})
     +' – '+e.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
