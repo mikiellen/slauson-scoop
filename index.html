@@ -4,11 +4,9 @@
   "schemaVersion": 1,
   "description": "Slauson Scoop — weekly US pre-seed, seed, and Series A deal digest for Slauson & Co. Pulls live from the Fundraise Digest Notion database. Features editorial blog-style layout, stage filters, cross-edition search, archive by date, and source submission form.",
   "mcpTools": [
-    "mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-query-database-view",
-    "mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-create-pages"
+    "mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-query-database-view"
   ],
   "mcpServerNames": [
-    "Notion",
     "Notion"
   ]
 }
@@ -353,86 +351,6 @@ body {
 .archive-meta { font-family: 'Space Mono', monospace; font-size: 10px; color: #555; margin-top: 4px; }
 .archive-arrow { color: var(--orange); font-size: 16px; font-family: 'Space Mono', monospace; }
 
-/* SOURCE SUBMISSION */
-.sources-wrap { padding: 32px; max-width: 540px; }
-.sources-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 6px;
-  letter-spacing: -0.3px;
-}
-.sources-sub {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 28px;
-  line-height: 1.7;
-}
-.form-group { margin-bottom: 16px; }
-.form-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #555;
-  display: block;
-  margin-bottom: 6px;
-}
-.form-input, .form-textarea, .form-select {
-  width: 100%;
-  padding: 10px 14px;
-  border: 0.5px solid #333;
-  border-radius: 2px;
-  background: #111;
-  font-size: 13px;
-  color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
-}
-.form-textarea { min-height: 80px; resize: vertical; line-height: 1.6; }
-.form-input:focus, .form-textarea:focus, .form-select:focus {
-  outline: none;
-  border-color: var(--yellow);
-}
-.submit-btn {
-  background: var(--black);
-  color: var(--yellow);
-  border: none;
-  padding: 11px 26px;
-  border-radius: 2px;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.submit-btn:hover { background: #222; }
-.success-msg {
-  display: inline-block;
-  margin-left: 12px;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  color: var(--mid);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.pending-list { margin-top: 36px; }
-.pending-title {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 0.5px solid var(--rule);
-}
-.pending-item { padding: 10px 0; border-bottom: 0.5px solid #1a1a1a; }
-.pending-item-name { font-size: 12px; color: var(--white); }
-.pending-item-url { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--orange); margin-top: 2px; word-break: break-all; }
-.pending-item-note { font-size: 11px; color: #aaa; margin-top: 2px; }
-.pending-type-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #aaa; padding: 14px 0 6px; }
-
 /* UTILS */
 .loading { padding: 48px 32px; font-family: 'Space Mono', monospace; font-size: 12px; color: #444; text-align: center; }
 .empty { padding: 40px 0; font-size: 13px; color: #444; font-style: italic; }
@@ -466,7 +384,6 @@ mark {
 <nav class="top-nav">
   <button class="nav-tab active" onclick="showTab('edition')">This Week</button>
   <button class="nav-tab" onclick="showTab('archive')">Archive</button>
-  <button class="nav-tab" onclick="showTab('sources')">Submit Source</button>
 </nav>
 
 <!-- THIS WEEK VIEW -->
@@ -511,31 +428,6 @@ mark {
     </div>
   </div>
   <div id="archive-list" class="archive-grid"></div>
-</div>
-
-<!-- SOURCES VIEW -->
-<div id="view-sources" style="display:none">
-  <div class="masthead">
-    <div class="mast-eyebrow">Slauson &amp; Co. &nbsp;·&nbsp; US early-stage deals</div>
-    <div class="pub-name">Slauson <span>Scoop</span></div>
-    <hr class="mast-rule">
-    <div class="mast-bottom">
-      <div class="mast-tagline">Submit a Source</div>
-    </div>
-  </div>
-  <div class="sources-wrap">
-    <div class="sources-title">Suggest a source</div>
-    <div class="sources-sub">Know a newsletter, blog, or site surfacing US early-stage deals we might be missing? Drop it here and we'll review it before the next scan.</div>
-    <form onsubmit="submitSource(event)">
-      <div class="form-group">
-        <label class="form-label">URL</label>
-        <input class="form-input" type="text" id="src-url" placeholder="https://…" required>
-      </div>
-      <button class="submit-btn" type="submit">Submit</button>
-      <span class="success-msg" id="success-msg">Saved — picks up next Monday.</span>
-    </form>
-    <div class="pending-list" id="pending-list"></div>
-  </div>
 </div>
 
 <script>
@@ -2670,9 +2562,6 @@ const SEED_DATA = [
   }
 ];
 const VIEW_URL = 'https://www.notion.so/658535f7f89a410c9cadc68752a0854c?v=72f6036a4bbb410ca6b2af43d5617dc2';
-const SOURCES_VIEW_URL = 'https://www.notion.so/7247150cc3ad4c3a8e4673c39773e0a8?v=0126c5ef-ca60-4484-a6d0-c1e9fd9fdc3a';
-const SOURCES_DS_ID = '123a6e01-aa1f-43fe-9c61-8411df87020f';
-const NOTION_CREATE = 'mcp__48bb3d25-63a5-403c-9f8a-ab3fc16d7ced__notion-create-pages';
 const STAGE_ORDER = ['Pre-Seed','Seed','Series A','Growth','Exit'];
 const STAGE_LABEL = { 'Exit': 'Exits' };
 
@@ -2704,14 +2593,13 @@ function exitTypeBadge(type) {
 
 // ── Tab nav ──────────────────────────────────────────
 function showTab(tab) {
-  ['edition','archive','sources'].forEach(t => {
+  ['edition','archive'].forEach(t => {
     document.getElementById('view-'+t).style.display = t===tab ? '' : 'none';
   });
   document.querySelectorAll('.nav-tab').forEach((el,i) => {
-    el.classList.toggle('active', ['edition','archive','sources'][i]===tab);
+    el.classList.toggle('active', ['edition','archive'][i]===tab);
   });
   if (tab==='archive') renderArchive();
-  if (tab==='sources') renderSourceList();
 }
 
 // ── Data ─────────────────────────────────────────────
@@ -2987,78 +2875,6 @@ function goToEdition(ed) {
   document.querySelectorAll('.controls .pill[data-market]').forEach(el=>el.classList.remove('active'));
   showTab('edition');
   renderEditionView(ed, 'All', null);
-}
-
-// ── Source submission ─────────────────────────────────
-function nameFromUrl(raw) {
-  try {
-    const u = new URL(raw.startsWith('http') ? raw : 'https://'+raw);
-    return u.hostname.replace(/^www\./,'');
-  } catch(e) { return raw; }
-}
-
-async function submitSource(e) {
-  e.preventDefault();
-  const url = document.getElementById('src-url').value.trim();
-  if (!url) return;
-
-  const name = nameFromUrl(url);
-  const btn = e.target.querySelector('.submit-btn');
-  btn.textContent = 'Saving…';
-  btn.disabled = true;
-
-  try {
-    const today = new Date().toISOString().split('T')[0];
-    await window.cowork.callMcpTool(NOTION_CREATE, {
-      parent: { type: 'data_source_id', data_source_id: SOURCES_DS_ID },
-      pages: [{ properties: {
-        'Name': name,
-        'userDefined:URL': url.startsWith('http') ? url : 'https://'+url,
-        'Email': '',
-        'Type': 'Website',
-        'Notes': 'Submitted via Slauson Scoop',
-        'Active': '__YES__',
-        'date:Date Added:start': today
-      }}]
-    });
-    document.getElementById('src-url').value = '';
-    const msg = document.getElementById('success-msg');
-    msg.style.opacity = 1;
-    setTimeout(()=>{ msg.style.opacity=0; }, 3000);
-    renderSourceList();
-  } catch(err) {
-    alert('Could not save — check Notion connection.');
-  } finally {
-    btn.textContent = 'Submit';
-    btn.disabled = false;
-  }
-}
-
-async function renderSourceList() {
-  const el = document.getElementById('pending-list');
-  el.innerHTML = '<div class="pending-title">Loading current sources…</div>';
-  try {
-    const data = await window.cowork.callMcpTool(NOTION_TOOL, { view_url: SOURCES_VIEW_URL });
-    const sources = (data.results || []).filter(s => s.Active === '__YES__')
-      .sort((a,b) => (a.Type||'').localeCompare(b.Type||'') || (a.Name||'').localeCompare(b.Name||''));
-    if (!sources.length) { el.innerHTML = ''; return; }
-    const byType = {};
-    sources.forEach(s => { (byType[s.Type||'Other'] = byType[s.Type||'Other']||[]).push(s); });
-    let html = `<div class="pending-title">Currently scanning (${sources.length} sources)</div>`;
-    ['Newsletter','Website','RSS Feed','Other'].filter(t=>byType[t]).forEach(t => {
-      html += `<div class="pending-type-label">${escHtml(t)}s</div>`;
-      byType[t].forEach(s => {
-        html += `<div class="pending-item">
-          <div class="pending-item-name">${escHtml(s.Name||'')}</div>
-          <div class="pending-item-url">${escHtml(s['userDefined:URL']||s.Email||'')}</div>
-          ${s.Notes?`<div class="pending-item-note">${escHtml(s.Notes)}</div>`:''}
-        </div>`;
-      });
-    });
-    el.innerHTML = html;
-  } catch(err) {
-    el.innerHTML = '<div class="pending-title">Could not load sources.</div>';
-  }
 }
 
 // ── Init ──────────────────────────────────────────────
