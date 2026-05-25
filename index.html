@@ -634,16 +634,3 @@ renderArchive();
 
 </body>
 </html>
-            const exits = SEED_DATA.filter(d => d.Stage === 'Exit');
-            const total_raised = rounds.reduce((sum, d) => sum + (d['Amount (M)'] || 0), 0);
-
-            document.getElementById('stat-total').textContent = SEED_DATA.length;
-            document.getElementById('stat-rounds').textContent = rounds.length;
-            document.getElementById('stat-raised').textContent = '$' + total_raised.toFixed(0) + 'M';
-            document.getElementById('stat-exits').textContent = exits.length;
-        }
-
-        renderTable();
-    </script>
-</body>
-</html>
