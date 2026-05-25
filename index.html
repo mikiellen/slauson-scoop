@@ -505,26 +505,16 @@ function entryHTML(d, highlightQ) {
   const inv = getInvestors(d);
 
   let html = `
-    <div class="deal-entry">
+    <div class="entry" data-stage="${stage}">
       <div class="entry-header">
-        <div class="company-name">${escHtml(d.Company)}</div>
-        <div class="stage-badge ${stageCls}">${escHtml(stage)}</div>
-        <div class="amount">${amt}</div>
+        <span class="entry-name">${escHtml(d.Company)}</span>
+        <span class="entry-amount">${amt}</span>
       </div>
-      <div class="description">${escHtml(d.Description)}</div>
-      <div class="entry-meta">
-        <div class="meta-item">
-          <div class="meta-label">Location</div>
-          <div>${escHtml(loc)}</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Market</div>
-          <div>${escHtml(d.Market||'—')}</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Investors</div>
-          <div>${escHtml(inv||'—')}</div>
-        </div>
+      <div class="entry-byline">
+        ${loc}<span class="sep">·</span>${escHtml(d.Market||'—')}
+      </div>
+      <div class="entry-body">
+        ${escHtml(d.Description)}
       </div>
     </div>
   `;
