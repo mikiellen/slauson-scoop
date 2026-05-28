@@ -466,7 +466,6 @@ mark {
 <nav class="top-nav">
   <button class="nav-tab active" onclick="showTab('edition')">This Week</button>
   <button class="nav-tab" onclick="showTab('archive')">Archive</button>
-  <button class="nav-tab" onclick="showTab('sources')">Submit Source</button>
 </nav>
 
 <!-- THIS WEEK VIEW -->
@@ -3800,7 +3799,7 @@ function processDeals(results, live) {
     return (b['Amount (M)']||0) - (a['Amount (M)']||0);
   });
   const editions = getEditions();
-  currentEdition = editions[0] || null;
+  currentEdition = '2026-05-18'; // Set to week ending 5/24
   if (currentEdition) renderEditionView(currentEdition, currentStage, currentMarket);
   else document.getElementById('deals-body').innerHTML = '<div class="empty">No deals yet.</div>';
   renderArchive();
