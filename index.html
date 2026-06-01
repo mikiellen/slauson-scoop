@@ -2,7 +2,7 @@
 {
   "name": "Slauson Scoop",
   "schemaVersion": 1,
-  "description": "Slauson Scoop — weekly US early-stage deals digest. Features current edition, stage/market filters, search, and archive by date.",
+  "description": "Slauson Scoop — weekly US early-stage deals digest",
   "mcpTools": []
 }
 </script>
@@ -98,481 +98,377 @@ body {
   text-transform: uppercase;
 }
 .pub-name span { color: var(--yellow); }
-.mast-rule {
-  border: none;
-  border-top: 1px solid #222;
-  margin: 16px 0 14px;
+.pub-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #999;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
-.mast-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.mast-tagline { font-family: 'Space Mono', monospace; font-size: 10px; color: #555; letter-spacing: 1px; }
-.mast-date { font-family: 'Space Mono', monospace; font-size: 10px; color: #555; letter-spacing: 1px; }
 
-.lede {
-  background: #111;
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 32px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  padding: 20px 0;
   border-bottom: 1px solid #222;
 }
-.lede-text {
-  font-size: 13px;
-  color: #888;
-  line-height: 1.75;
-  padding: 12px 0;
-}
-.lede-stats {
-  display: flex;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-.lede-stat {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 16px 0;
-}
-.lede-stat strong {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 24px;
-  color: var(--white);
-  display: block;
-  letter-spacing: -0.5px;
-  line-height: 1.1;
-  margin-bottom: 3px;
-  text-transform: none;
-  font-weight: 700;
-}
-
-.controls {
-  display: flex;
-  gap: 6px;
-  padding: 12px 32px;
-  align-items: center;
-  flex-wrap: wrap;
-  background: var(--black);
-  border-bottom: 1px solid #1a1a1a;
-  position: sticky;
-  top: 49px;
-  z-index: 10;
-}
-.pill-divider {
-  width: 1px;
-  height: 16px;
-  background: #333;
-  margin: 0 4px;
-}
-.pill {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  padding: 5px 13px;
-  border-radius: 2px;
-  border: 0.5px solid #444;
-  color: #aaa;
-  cursor: pointer;
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #555;
   background: transparent;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: all 0.1s;
-}
-.pill.active { background: var(--yellow); color: var(--black); border-color: var(--yellow); font-weight: 700; }
-.pill:not(.active):hover { border-color: #777; color: #ccc; }
-.search-input {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  padding: 5px 14px;
-  border: 0.5px solid #444;
-  border-radius: 2px;
-  background: #111;
-  color: #aaa;
-  width: 170px;
-  margin-left: auto;
-  letter-spacing: 0.03em;
-}
-.search-input::placeholder { color: #555; }
-.search-input:focus { outline: none; border-color: var(--yellow); color: var(--white); }
-
-.deals-body { padding: 0 32px 60px 34px; background: var(--black); }
-
-.section-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #555;
-  padding: 24px 0 14px;
-  border-bottom: 0.5px solid #222;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.section-count {
-  color: #555;
-  letter-spacing: 0;
-  text-transform: none;
-  font-size: 10px;
-  font-family: 'Space Mono', monospace;
-}
-
-.entry { padding: 22px 0 22px 18px; border-bottom: 0.5px solid #141414; border-left: 2px solid transparent; margin-left: -34px; }
-
-.entry[data-stage="Pre-Seed"] { border-left-color: #7DF431; }
-.entry[data-stage="Pre-Seed"] .entry-amount { color: #7DF431; }
-.entry[data-stage="Seed"] { border-left-color: #FFF200; }
-.entry[data-stage="Seed"] .entry-amount { color: #FFF200; }
-.entry[data-stage="Series A"] { border-left-color: #FF9100; }
-.entry[data-stage="Series A"] .entry-amount { color: #FF9100; }
-.entry[data-stage="Growth"] { border-left-color: #7DF431; }
-.entry[data-stage="Growth"] .entry-amount { color: #7DF431; }
-.entry[data-stage="Exit"] { border-left-color: #FFF200; }
-.entry[data-stage="Exit"] .entry-amount { color: #FFF200; }
-
-.entry-header {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 5px;
-}
-.entry-name {
+  color: #999;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 21px;
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1.2;
-  letter-spacing: -0.3px;
-}
-.entry-amount {
-  font-family: 'Space Mono', monospace;
-  font-size: 15px;
-  font-weight: 700;
-}
-.badge {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  padding: 2px 8px;
-  border-radius: 2px;
-  letter-spacing: 0.05em;
-}
-.women-badge {
-  color: var(--black);
-  background: var(--green);
-}
-.market-badge {
-  border: 0.5px solid #333;
-  color: #777;
-  text-transform: uppercase;
-}
-.entry-byline {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  color: #888;
-  margin-bottom: 10px;
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.sep { color: #555; }
-.entry-body {
-  font-size: 13px;
-  color: #aaa;
-  line-height: 1.75;
-}
-.entry-link {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px solid #333;
-  transition: border-color 0.15s;
-}
-.entry-link:hover { border-bottom-color: var(--yellow); }
-
-.archive-grid {
-  padding: 24px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: #1a1a1a;
-}
-.archive-row {
-  background: var(--black);
-  padding: 18px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 12px;
   cursor: pointer;
-  gap: 12px;
-  transition: background 0.1s;
+  border-radius: 4px;
+  transition: all 0.15s;
 }
-.archive-row:hover { background: #111; }
-.archive-date {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 17px;
+.filter-btn:hover { border-color: #ccc; color: #ccc; }
+.filter-btn.active {
+  background: var(--yellow);
+  color: var(--black);
+  border-color: var(--yellow);
+}
+
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.deal-card {
+  border: 1px solid #333;
+  padding: 24px;
+  background: #0F0F0F;
+  border-radius: 4px;
+  transition: all 0.2s;
+  cursor: default;
+}
+.deal-card:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 0 20px rgba(255, 242, 0, 0.1);
+}
+
+.deal-stage {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+.deal-company {
+  font-size: 20px;
   font-weight: 600;
   color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.2;
 }
-.archive-meta { font-family: 'Space Mono', monospace; font-size: 10px; color: #555; margin-top: 4px; }
-.archive-arrow { color: var(--orange); font-size: 16px; }
+.deal-amount {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: var(--yellow);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.deal-desc {
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.deal-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #666;
+  line-height: 1.6;
+}
+.deal-meta-label {
+  color: #555;
+  display: block;
+  margin-top: 8px;
+}
 
-.empty { padding: 40px 32px; font-size: 13px; color: #444; font-style: italic; text-align: center; }
-mark {
-  background: rgba(255,242,0,0.35);
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 1px;
+.edition-header {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--yellow);
+  margin-top: 48px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--yellow);
+}
+
+.edition { margin-bottom: 60px; }
+.edition.current .edition-header::before {
+  content: "● ";
+  color: var(--green);
+}
+
+footer {
+  background: #0F0F0F;
+  border-top: 1px solid #222;
+  padding: 40px 32px;
+  margin-top: 80px;
+  text-align: center;
+  font-size: 11px;
+  color: #666;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid #555;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 32px;
+}
+.search-box::placeholder { color: #555; }
+
+.no-results {
+  text-align: center;
+  padding: 60px 32px;
+  color: #666;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .pub-name { font-size: 36px; }
+  .deals-grid { grid-template-columns: 1fr; }
+  .top-nav { padding: 0 16px; }
+  .masthead { padding: 20px 16px 0; }
+  .content { padding: 0 16px; }
 }
 </style>
 </head>
 <body>
 
-<nav class="top-nav">
-  <div class="nav-logo">Slauson Scoop</div>
+<div class="top-nav">
+  <div class="nav-logo">Slauson & Co.</div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showTab('edition')">This Week</button>
+    <button class="nav-tab active" onclick="showTab('current')">Current</button>
     <button class="nav-tab" onclick="showTab('archive')">Archive</button>
   </div>
-</nav>
-
-<div id="view-edition">
-  <div class="masthead">
-    <div class="mast-eyebrow">Slauson & Co. · US early-stage deals</div>
-    <div class="pub-name">Slauson <span>Scoop</span></div>
-    <hr class="mast-rule">
-    <div class="mast-bottom">
-      <div class="mast-date" id="edition-date-header"></div>
-    </div>
-  </div>
-  <div class="lede">
-    <div class="lede-stats" id="lede-stats"></div>
-  </div>
-  <div class="controls">
-    <button class="pill active" data-stage="All" onclick="filterStage('All',this)">All</button>
-    <button class="pill" data-stage="Pre-Seed" onclick="filterStage('Pre-Seed',this)">Pre-Seed</button>
-    <button class="pill" data-stage="Seed" onclick="filterStage('Seed',this)">Seed</button>
-    <button class="pill" data-stage="Series A" onclick="filterStage('Series A',this)">Series A</button>
-    <button class="pill" data-stage="Growth" onclick="filterStage('Growth',this)">Growth</button>
-    <button class="pill" data-stage="Exit" onclick="filterStage('Exit',this)">Exits</button>
-    <span class="pill-divider"></span>
-    <button class="pill" data-market="B2B" onclick="filterMarket('B2B',this)">B2B</button>
-    <button class="pill" data-market="Consumer" onclick="filterMarket('Consumer',this)">Consumer</button>
-    <input class="search-input" type="text" id="search-main" placeholder="Search all editions…" oninput="handleSearch(this.value)">
-  </div>
-  <div class="deals-body" id="deals-body"></div>
 </div>
 
-<div id="view-archive" style="display:none">
+<div id="current-tab">
   <div class="masthead">
-    <div class="mast-eyebrow">Slauson & Co. · US early-stage deals</div>
-    <div class="pub-name">Slauson <span>Scoop</span></div>
-    <hr class="mast-rule">
-    <div class="mast-bottom">
-      <div class="mast-tagline">Archive</div>
-    </div>
+    <div class="mast-eyebrow">This Week in US Early-Stage Funding</div>
+    <h1 class="pub-name">Slauson <span>Scoop</span></h1>
+    <div class="pub-date">May 31 – June 6, 2026</div>
   </div>
-  <div id="archive-list" class="archive-grid"></div>
+
+  <div class="content">
+    <div class="filter-bar">
+      <input type="text" class="search-box" id="searchInput" placeholder="Search deals..." onkeyup="filterDeals()">
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterByStage('all')">All</button>
+      <button class="filter-btn" onclick="filterByStage('Pre-Seed')">Pre-Seed</button>
+      <button class="filter-btn" onclick="filterByStage('Seed')">Seed</button>
+      <button class="filter-btn" onclick="filterByStage('Series A')">Series A</button>
+      <button class="filter-btn" onclick="filterByStage('Growth')">Growth</button>
+      <button class="filter-btn" onclick="filterByStage('Exit')">Exit</button>
+    </div>
+
+    <div id="deals-container" class="deals-grid"></div>
+  </div>
 </div>
+
+<div id="archive-tab" style="display:none;">
+  <div class="content">
+    <div id="archive-container"></div>
+  </div>
+</div>
+
+<footer>
+  <p>Slauson Scoop tracks early-stage funding across the US. Data from Slauson & Co. research. Updated weekly.</p>
+</footer>
 
 <script>
-const DEALS = [
-  {"Company":"Groq","Stage":"Growth","Amount (M)":650,"City":"Austin","State":"TX","Investors":"Multiple","Market":"B2B","Women-Founded":"__NO__","Description":"AI inference chip maker raises $650M in Series C","date:Edition Date:start":"2026-05-25"},
-  {"Company":"Observable Space","Stage":"Series A","Amount (M)":90,"City":"Adrian","State":"MI","Investors":"Lux Capital (lead); Upfront Ventures, Detroit Venture Partners, Island Green Capital, RTX Ventures, BRV Capital, Fathom Fund","Market":"B2B","Women-Founded":"__NO__","Description":"Space optical systems company (laser comms + space domain awareness) raised $90M Series A and secured a $94M U.S. Space Force contract.","date:Edition Date:start":"2026-05-25"},
-  {"Company":"Anthropic","Stage":"Growth","Amount (M)":65000,"City":"San Francisco","State":"CA","Investors":"Dragoneer, Greenoaks, Sequoia Capital, Altimeter Capital (co-leads)","Market":"B2B","Women-Founded":"__NO__","Description":"AI model company raising $65B at $900B pre-money valuation, nearly tripling its last valuation.","date:Edition Date:start":"2026-05-25"},
-  {"Company":"Cognition","Stage":"Growth","Amount (M)":1000,"City":"San Francisco","State":"CA","Investors":"Multiple","Market":"B2B","Women-Founded":"__NO__","Description":"Autonomous AI software engineering agents (Devin) raised $1B at a $25B pre-money valuation.","date:Edition Date:start":"2026-05-25"},
-  {"Company":"Thea Energy","Stage":"Series B","Amount (M)":100,"City":"Unknown","State":"Unknown","Investors":"Multiple","Market":"B2B","Women-Founded":"__NO__","Description":"Systems for stellarator fusion reactors raised $100M Series B.","date:Edition Date:start":"2026-05-25"},
-  {"Company":"Mecka AI","Stage":"Series A","Amount (M)":60,"City":"New York","State":"NY","Investors":"Framework Ventures (lead); Menlo Ventures, SV Angel, Kindred Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Collects human motion data via body sensors and iPhones to train robots.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"MokN","Stage":"Series A","Amount (M)":15,"City":"New York","State":"NY","Investors":"GV (lead); Datadog","Market":"B2B","Women-Founded":"__NO__","Description":"Cybersecurity platform backed by Google Ventures and Datadog.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Modiqo","Stage":"Seed","Amount (M)":16,"City":"San Francisco","State":"CA","Investors":"Buckley Ventures (lead); Y Combinator","Market":"B2B","Women-Founded":"__NO__","Description":"Turns successful AI agents into packaged SaaS products.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Polsia","Stage":"Series A","Amount (M)":30,"City":"San Francisco","State":"CA","Investors":"Sound Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"AI ops platform approaching $10M ARR with one founder and zero employees.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Picogrid","Stage":"Series A","Amount (M)":45,"City":"El Segundo","State":"CA","Investors":"Bessemer Venture Partners (lead); Washington Harbour, GSBackers","Market":"B2B","Women-Founded":"__NO__","Description":"Defense tech hardware for military sensor and power grid applications.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Quartermaster","Stage":"Series A","Amount (M)":43,"City":"Arlington","State":"VA","Investors":"First Round Capital, Quiet Capital (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"SmartMast sensor platform turns commercial ships into a distributed maritime sensing network.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Sekai","Stage":"Series A","Amount (M)":420,"City":"Sunnyvale","State":"CA","Investors":"Khosla Ventures, Connect Ventures (co-leads); a16z, Mayfield, 645 Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Generates mini-apps from text prompts — AI-native app creation platform.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Itera","Stage":"Seed","Amount (M)":12,"City":"San Francisco","State":"CA","Investors":"Upfront Ventures, Costanoa Ventures, Colle Capital (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"Fluid circuit board technology using liquid metal substrates to reconfigure electronics.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Gray Swan","Stage":"Series A","Amount (M)":40,"City":"Pittsburgh","State":"PA","Investors":"Wing Venture Capital, Madrona (lead); Obvious Ventures, Snowflake Ventures, Hudson River Trading, Samsung Next","Market":"B2B","Women-Founded":"__NO__","Description":"AI security platform that helps enterprises detect and defend against AI-driven threats.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Reactor","Stage":"Series A","Amount (M)":59,"City":"San Francisco","State":"CA","Investors":"Lightspeed Venture Partners (lead); WndrCo, Amplify Partners, Sky9 Capital, FPV Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Developer platform for real-time generative video and world models.","date:Edition Date:start":"2026-06-01"},
-  {"Company":"Hermeus","Stage":"Growth","Amount (M)":350,"City":"Atlanta","State":"GA","Investors":"Khosla Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Defense aviation startup building hypersonic aircraft for the US government and commercial markets.","date:Edition Date:start":"2026-04-13"},
-  {"Company":"Sedron Technologies","Stage":"Exit","Amount (M)":500,"City":"Sedro-Woolley","State":"WA","Investors":"Ara Partners (strategic)","Market":"B2B","Women-Founded":"__NO__","Description":"Waste upcycling infrastructure company secured up to $500M strategic investment.","date:Edition Date:start":"2026-04-13"},
-  {"Company":"SUJA Life","Stage":"Exit","Amount (M)":100,"City":"Oceanside","State":"CA","Investors":"Goldman Sachs + Jefferies (underwriters)","Market":"Consumer","Women-Founded":"__NO__","Description":"Organic cold-pressed juice brand filed for a $100M IPO; $327M in revenue.","date:Edition Date:start":"2026-04-13"},
-  {"Company":"Slate Auto","Stage":"Growth","Amount (M)":650,"City":"Warsaw","State":"IN","Investors":"TWG Global","Market":"Consumer","Women-Founded":"__NO__","Description":"Bezos-backed EV startup targeting a sub-$30K modular pickup truck. Slauson & Co. participated.","date:Edition Date:start":"2026-04-13"},
-  {"Company":"Glydways","Stage":"Growth","Amount (M)":170,"City":"San Francisco","State":"CA","Investors":"Suzuki Motor + ACS Group + Khosla Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Autonomous robocar transit networks for cities and campuses.","date:Edition Date:start":"2026-04-13"},
-  {"Company":"Chapter","Stage":"Growth","Amount (M)":100,"City":"New York","State":"NY","Investors":"Generation Investment Management","Market":"Consumer","Women-Founded":"__NO__","Description":"AI-powered Medicare navigation platform that crossed $100M ARR.","date:Edition Date:start":"2026-04-13"},
-  {"Company":"Lucid","Stage":"Growth","Amount (M)":750,"City":"Newark","State":"CA","Investors":"Saudi PIF's Ayar Third Investment + Uber","Market":"Consumer","Women-Founded":"__NO__","Description":"Luxury EV manufacturer raised a growth round; Saudi PIF led with $550M, Uber invested $200M.","date:Edition Date:start":"2026-04-13"}
+const allDeals = {
+  "2026-06-01": [
+    { company: "Mecka AI", stage: "Series A", amount: 60, market: "B2B", city: "New York", state: "NY", desc: "Trains robots using human movement data collected from body sensors and iPhones." },
+    { company: "MokN", stage: "Series A", amount: 15, market: "B2B", city: "New York", state: "NY", desc: "Cybersecurity platform backed by Google Ventures and Datadog." },
+    { company: "Orəbella", stage: "Series A", amount: null, market: "Consumer", city: "Los Angeles", state: "CA", desc: "Bella Hadid's functional fragrance brand expanding to Douglas, Selfridges, and Ulta Beauty Middle East." },
+    { company: "Modiqo", stage: "Seed", amount: 16, market: "B2B", city: "San Francisco", state: "CA", desc: "Turns successful AI agents into packaged SaaS products." },
+    { company: "Polsia", stage: "Series A", amount: 30, market: "B2B", city: "San Francisco", state: "CA", desc: "AI ops platform approaching $10M ARR with one founder and zero employees." },
+    { company: "Didit", stage: "Seed", amount: 7.5, market: "B2B", city: "Los Angeles", state: "CA", desc: "AI identity and fraud infrastructure platform." },
+    { company: "Picogrid", stage: "Series A", amount: 45, market: "B2B", city: "El Segundo", state: "CA", desc: "Defense tech hardware for military sensor and power grid applications." },
+    { company: "Lastwall", stage: "Series A", amount: 16, market: "B2B", city: "Arlington", state: "VA", desc: "Quantum-resilient cybersecurity platform for defense and government." },
+    { company: "Kubera Health", stage: "Seed", amount: 6.5, market: "B2B", city: "Los Angeles", state: "CA", desc: "Contract-to-payment automation system for healthcare providers." },
+    { company: "NavigateAI", stage: "Seed", amount: 25, market: "B2B", city: "San Francisco", state: "CA", desc: "AI coach for construction workers." },
+    { company: "Sekai", stage: "Series A", amount: 20, market: "Consumer", city: "Sunnyvale", state: "CA", desc: "Platform that lets anyone build mini-apps via text prompts." },
+    { company: "Itera", stage: "Seed", amount: 12, market: "B2B", city: "San Francisco", state: "CA", desc: "Fluid circuit board technology using liquid metal substrates." },
+    { company: "Quartermaster", stage: "Series A", amount: 43, market: "B2B", city: "Arlington", state: "VA", desc: "SmartMast sensor platform turns commercial ships into a distributed maritime sensing network." },
+    { company: "Volt Harbor", stage: "Seed", amount: 2, market: "B2B", city: "Ann Arbor", state: "MI", desc: "Energy storage systems supplier targeting AI data center power demand." },
+    { company: "Gray Swan", stage: "Series A", amount: 40, market: "B2B", city: "Pittsburgh", state: "PA", desc: "AI security platform detecting AI-driven threats and model vulnerabilities." },
+    { company: "Hardline", stage: "Pre-Seed", amount: 2, market: "B2B", city: "Santa Monica", state: "CA", desc: "Voice-first construction tech converting jobsite calls into structured logs." },
+    { company: "Reactor", stage: "Series A", amount: 59, market: "B2B", city: "San Francisco", state: "CA", desc: "Developer platform for real-time generative video and world models." },
+    { company: "Campo Grande", stage: "Seed", amount: 4, market: "Consumer", city: "New York", state: "NY", desc: "Premium Iberico pork brand positioning as the wagyu of pork." }
+  ],
+  "2026-05-25": [
+    { company: "Observable Space", stage: "Series A", amount: 90, market: "B2B", city: "Adrian", state: "MI", desc: "Space optical systems company (laser comms + space domain awareness) raised $90M Series A and secured a $94M U.S. Space Force contract." },
+    { company: "Groq", stage: "Growth", amount: 650, market: "B2B", city: "Austin", state: "TX", desc: "AI inference chip maker raises $650M in Series C." },
+    { company: "Anthropic", stage: "Growth", amount: 65000, market: "B2B", city: "San Francisco", state: "CA", desc: "AI safety lab behind Claude raised $65B Series H at $965B post-money valuation on $47B annualized revenue run rate." },
+    { company: "Cognition", stage: "Growth", amount: 1000, market: "B2B", city: "San Francisco", state: "CA", desc: "Autonomous AI software engineering agents (Devin) raised $1B at a $25B pre-money valuation." },
+    { company: "Thea Energy", stage: "Growth", amount: 100, market: "B2B", city: "Kearny", state: "NJ", desc: "Builds software-controlled magnet systems for stellarator fusion reactors." },
+    { company: "Focused Energy", stage: "Growth", amount: 240, market: "B2B", city: "Unknown", state: "Unknown", desc: "Fusion energy company raises $240M." },
+    { company: "Feel Peptides", stage: "Seed", amount: 3, market: "Consumer", city: "Unknown", state: "Unknown", desc: "Peptide supplement company secures $3M seed funding." },
+    { company: "Fields Good", stage: "Seed", amount: 1.8, market: "Consumer", city: "Unknown", state: "Unknown", desc: "Consumer health/CPG company launches with $1.8M seed round." },
+    { company: "B-SIDES", stage: "Seed", amount: 0.5, market: "Consumer", city: "Unknown", state: "Unknown", desc: "Upcycled protein snack brand." },
+    { company: "SOND", stage: "Seed", amount: 7, market: "Consumer", city: "Boston", state: "MA", desc: "AI-powered sleep earbuds founded by Bose's former head of sleep products." },
+    { company: "Capchase", stage: "Growth", amount: 200, market: "B2B", city: "New York", state: "NY", desc: "B2B buy now, pay later platform for software companies." },
+    { company: "ISP Tek Services", stage: "Exit", amount: null, market: "B2B", city: "Southlake", state: "TX", desc: "Electronics refurbisher acquired by Ivy Technology." },
+    { company: "VKTRY", stage: "Exit", amount: null, market: "Consumer", city: "Unknown", state: "Unknown", desc: "Performance-focused insole maker acquired by Dr. Scholl's." },
+    { company: "Iconic", stage: "Seed", amount: 6, market: "B2B", city: "New York", state: "NY", desc: "AI-enabled M&A advisor for small business owners." },
+    { company: "Canyon Code", stage: "Pre-Seed", amount: 5, market: "B2B", city: "Sunnyvale", state: "CA", desc: "Builds enterprise controls for governing and auditing multi-agent AI applications." },
+    { company: "Velcro Cos.", stage: "Exit", amount: null, market: "B2B", city: "Manchester", state: "NH", desc: "Arsenal Capital Partners takes majority stake in the iconic fastening brand." },
+    { company: "Good Molecules", stage: "Growth", amount: null, market: "Consumer", city: "New York", state: "NY", desc: "Skincare brand received investment from Aria Growth Partners." },
+    { company: "OpenRouter", stage: "Growth", amount: 113, market: "B2B", city: "New York", state: "NY", desc: "Routes AI inference across proprietary and open-source models — hit $1.3B post-money." },
+    { company: "Stord", stage: "Growth", amount: 250, market: "B2B", city: "Atlanta", state: "GA", desc: "Commerce enablement platform now valued at $3B." },
+    { company: "Khloud", stage: "Seed", amount: 15, market: "Consumer", city: "Los Angeles", state: "CA", desc: "Protein-enriched snack brand founded by Khloe Kardashian." },
+    { company: "Tensormesh", stage: "Seed", amount: 20, market: "B2B", city: "Foster City", state: "CA", desc: "Inference optimization infrastructure backed by major chip and cloud players." },
+    { company: "Human Archive", stage: "Seed", amount: 8.2, market: "B2B", city: "Mountain View", state: "CA", desc: "Pays gig workers to capture real-world physical data for AI and robotics training." },
+    { company: "CasaPerks Technologies", stage: "Seed", amount: 15.8, market: "Consumer", city: "Austin", state: "TX", desc: "Real estate rental rewards platform that gives renters cash back." },
+    { company: "Gaia Fertility", stage: "Growth", amount: 100, market: "Consumer", city: "New York", state: "NY", desc: "IVF financing platform with 1,100+ members and 200+ clinic partnerships." },
+    { company: "Protuoso Biosciences", stage: "Seed", amount: 9.5, market: "B2B", city: "San Carlos", state: "CA", desc: "Protein synthetic biology platform targeting drug discovery." },
+    { company: "Arc", stage: "Seed", amount: 10.8, market: "B2B", city: "San Francisco", state: "CA", desc: "AI voice-ordering system for drive-thru restaurants." }
+  ],
+  "2026-05-26": [
+    { company: "LightTable", stage: "Series A", amount: 22, market: "B2B", city: "Denver", state: "CO", desc: "AI-powered construction quality control platform." },
+    { company: "Trajectory", stage: "Seed", amount: 15, market: "B2B", city: "San Francisco", state: "CA", desc: "Continual learning platform that post-trains AI models from real-world product usage." },
+    { company: "Certo", stage: "Seed", amount: 4, market: "B2B", city: "San Francisco", state: "CA", desc: "AI compliance tool for beauty and consumer goods brands." },
+    { company: "Solstice", stage: "Series A", amount: 21, market: "B2B", city: "New York", state: "NY", desc: "AI-native pharma marketing agency." }
+  ],
+  "2026-05-18": [
+    { company: "Hark", stage: "Series A", amount: 700, market: "Consumer", city: "San Jose", state: "CA", desc: "AI hardware startup building a universal AI interface with wearable devices." },
+    { company: "Modal", stage: "Growth", amount: 355, market: "B2B", city: "San Francisco", state: "CA", desc: "AI infrastructure layer at $4.65B valuation." },
+    { company: "Exa", stage: "Growth", amount: 250, market: "B2B", city: "San Francisco", state: "CA", desc: "AI-powered search API for developers at $2.2B valuation." },
+    { company: "Mercury", stage: "Growth", amount: 200, market: "B2B", city: "San Francisco", state: "CA", desc: "Digital banking platform for startups at $5.2B valuation." },
+    { company: "Nourish", stage: "Growth", amount: 100, market: "Consumer", city: "New York", state: "NY", desc: "Dietitian-led metabolic health platform." },
+    { company: "Vi", stage: "Growth", amount: 145, market: "B2B", city: "New York", state: "NY", desc: "Healthcare AI agents platform at $1.65B valuation." }
+  ]
+};
+
+const editions = [
+  { date: "2026-06-01", label: "May 31 – June 6, 2026", current: true },
+  { date: "2026-05-25", label: "May 24 – May 30, 2026" },
+  { date: "2026-05-26", label: "May 19 – May 25, 2026" },
+  { date: "2026-05-18", label: "May 10 – May 16, 2026" }
 ];
 
-let currentFilter = { stage: 'All', market: null, search: '' };
-let currentEdition = '2026-06-01';
+let currentFilter = "all";
+let currentSearch = "";
 
-function init() {
-  renderEdition();
-  renderArchive();
-  updateStats();
+function formatAmount(amount) {
+  if (amount === null || amount === undefined) return "Amount undisclosed";
+  if (amount >= 1000) return "$" + (amount / 1000).toFixed(1) + "B";
+  return "$" + amount + "M";
 }
 
-function renderEdition() {
-  const deals = DEALS.filter(d => d['date:Edition Date:start'] === currentEdition);
-  const filtered = applyFilters(deals);
-
-  const dateObj = new Date(currentEdition + 'T00:00:00Z');
-  const weekStart = new Date(dateObj);
-  weekStart.setDate(dateObj.getDate() - 5);
-  const weekEnd = dateObj;
-
-  const dateStr = `Week of ${weekStart.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})} – ${weekEnd.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}`;
-  document.getElementById('edition-date-header').textContent = dateStr;
-
-  let html = '';
-  const stageGroups = {};
-
-  filtered.forEach(d => {
-    if (!stageGroups[d.Stage]) stageGroups[d.Stage] = [];
-    stageGroups[d.Stage].push(d);
-  });
-
-  const stageOrder = ['Exit', 'Growth', 'Series A', 'Seed', 'Pre-Seed'];
-  stageOrder.forEach(stage => {
-    if (stageGroups[stage]) {
-      html += `<div class="section-label">
-        <span>${stage}</span>
-        <span class="section-count">${stageGroups[stage].length} deal${stageGroups[stage].length !== 1 ? 's' : ''}</span>
-      </div>`;
-
-      stageGroups[stage].forEach(d => {
-        const amountStr = d['Amount (M)'] > 0 ? `$${d['Amount (M)'].toLocaleString()}M` : '';
-        const womenBadge = d['Women-Founded'] === '__YES__' ? '<span class="badge women-badge">Women-Founded</span>' : '';
-        const marketBadge = `<span class="badge market-badge">${d.Market}</span>`;
-
-        html += `<div class="entry" data-stage="${d.Stage}" data-market="${d.Market}" data-search="${d.Company.toLowerCase()}">
-          <div class="entry-header">
-            <div class="entry-name">${d.Company}</div>
-            ${amountStr ? `<div class="entry-amount">${amountStr}</div>` : ''}
-            ${womenBadge}
-            ${marketBadge}
-          </div>
-          <div class="entry-byline">
-            <span>${d.City}${d.State ? ', ' + d.State : ''}</span>
-            <span class="sep">·</span>
-            <span>${d.Investors}</span>
-          </div>
-          <div class="entry-body">${d.Description}</div>
-        </div>`;
-      });
-    }
-  });
-
-  if (filtered.length === 0) {
-    html = '<div class="empty">No deals match your filters.</div>';
-  }
-
-  document.getElementById('deals-body').innerHTML = html;
-}
-
-function renderArchive() {
-  const editions = [...new Set(DEALS.map(d => d['date:Edition Date:start']))].sort().reverse();
-  let html = '';
-
-  editions.forEach(date => {
-    const dealsInEdition = DEALS.filter(d => d['date:Edition Date:start'] === date);
-    const dateObj = new Date(date + 'T00:00:00Z');
-    const dateStr = dateObj.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
-    const count = dealsInEdition.length;
-
-    html += `<div class="archive-row" onclick="switchEdition('${date}')">
-      <div>
-        <div class="archive-date">${dateStr}</div>
-        <div class="archive-meta">${count} deal${count !== 1 ? 's' : ''}</div>
+function renderDeals(deals) {
+  return deals.map(deal => `
+    <div class="deal-card" data-stage="${deal.stage}" data-company="${deal.company.toLowerCase()}">
+      <div class="deal-stage">${deal.stage}</div>
+      <div class="deal-company">${deal.company}</div>
+      <div class="deal-amount">${formatAmount(deal.amount)}</div>
+      <div class="deal-desc">${deal.desc}</div>
+      <div class="deal-meta">
+        <span class="deal-meta-label">Location: ${deal.city}${deal.city ? ', ' + deal.state : ''}</span>
+        <span class="deal-meta-label">Market: ${deal.market}</span>
       </div>
-      <div class="archive-arrow">→</div>
-    </div>`;
-  });
-
-  document.getElementById('archive-list').innerHTML = html;
+    </div>
+  `).join("");
 }
 
-function updateStats() {
-  const dealsInEdition = DEALS.filter(d => d['date:Edition Date:start'] === currentEdition);
-  const totalAmount = dealsInEdition.reduce((sum, d) => sum + (d['Amount (M)'] || 0), 0);
-  const avgAmount = dealsInEdition.length > 0 ? (totalAmount / dealsInEdition.length).toFixed(1) : 0;
+function filterDeals() {
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  currentSearch = search;
+  const container = document.getElementById("deals-container");
+  const cards = container.querySelectorAll(".deal-card");
 
-  const html = `
-    <div class="lede-stat">
-      <strong>${dealsInEdition.length}</strong>
-      Deals
-    </div>
-    <div class="lede-stat">
-      <strong>$${totalAmount.toLocaleString()}M</strong>
-      Capital
-    </div>
-    <div class="lede-stat">
-      <strong>$${parseFloat(avgAmount).toLocaleString()}M</strong>
-      Average
-    </div>
-  `;
-
-  document.getElementById('lede-stats').innerHTML = html;
-}
-
-function applyFilters(deals) {
-  return deals.filter(d => {
-    if (currentFilter.stage !== 'All' && d.Stage !== currentFilter.stage) return false;
-    if (currentFilter.market && d.Market !== currentFilter.market) return false;
-    if (currentFilter.search && !d.Company.toLowerCase().includes(currentFilter.search)) return false;
-    return true;
+  cards.forEach(card => {
+    const company = card.dataset.company;
+    const stage = card.dataset.stage;
+    const matchesSearch = company.includes(search) || search === "";
+    const matchesFilter = currentFilter === "all" || stage === currentFilter;
+    card.style.display = (matchesSearch && matchesFilter) ? "" : "none";
   });
 }
 
-function filterStage(stage, btn) {
-  document.querySelectorAll('.controls .pill[data-stage]').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  currentFilter.stage = stage;
-  renderEdition();
-}
-
-function filterMarket(market, btn) {
-  document.querySelectorAll('.controls .pill[data-market]').forEach(b => b.classList.remove('active'));
-  if (currentFilter.market === market) {
-    currentFilter.market = null;
-  } else {
-    btn.classList.add('active');
-    currentFilter.market = market;
-  }
-  renderEdition();
-}
-
-function handleSearch(query) {
-  currentFilter.search = query.toLowerCase();
-  renderEdition();
-}
-
-function switchEdition(date) {
-  currentEdition = date;
-  currentFilter = { stage: 'All', market: null, search: '' };
-  document.querySelectorAll('.controls .pill').forEach(p => {
-    if (p.getAttribute('data-stage') === 'All') {
-      p.classList.add('active');
-    } else {
-      p.classList.remove('active');
-    }
+function filterByStage(stage) {
+  currentFilter = stage;
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.classList.remove("active");
   });
-  document.getElementById('search-main').value = '';
-  renderEdition();
-  updateStats();
-  showTab('edition');
+  event.target.classList.add("active");
+  filterDeals();
+}
+
+function showCurrentEdition() {
+  const currentDeals = allDeals["2026-06-01"] || [];
+  const container = document.getElementById("deals-container");
+  container.innerHTML = currentDeals.length > 0 ? renderDeals(currentDeals) : '<div class="no-results">No deals found.</div>';
+  filterDeals();
 }
 
 function showTab(tab) {
-  document.getElementById('view-edition').style.display = tab === 'edition' ? 'block' : 'none';
-  document.getElementById('view-archive').style.display = tab === 'archive' ? 'block' : 'none';
-  document.querySelectorAll('.nav-tab').forEach((t, i) => {
-    t.classList.toggle('active', (i === 0 && tab === 'edition') || (i === 1 && tab === 'archive'));
-  });
+  const currentTab = document.getElementById("current-tab");
+  const archiveTab = document.getElementById("archive-tab");
+  const navTabs = document.querySelectorAll(".nav-tab");
+
+  if (tab === "current") {
+    currentTab.style.display = "";
+    archiveTab.style.display = "none";
+    navTabs[0].classList.add("active");
+    navTabs[1].classList.remove("active");
+    showCurrentEdition();
+  } else {
+    currentTab.style.display = "none";
+    archiveTab.style.display = "";
+    navTabs[0].classList.remove("active");
+    navTabs[1].classList.add("active");
+    renderArchive();
+  }
 }
 
-init();
+function renderArchive() {
+  const archiveContainer = document.getElementById("archive-container");
+  let html = "";
+
+  for (let i = 1; i < editions.length; i++) {
+    const edition = editions[i];
+    const deals = allDeals[edition.date] || [];
+    html += `
+      <div class="edition">
+        <h2 class="edition-header">${edition.label}</h2>
+        <div class="deals-grid">
+          ${deals.length > 0 ? renderDeals(deals) : '<div class="no-results">No deals recorded.</div>'}
+        </div>
+      </div>
+    `;
+  }
+
+  archiveContainer.innerHTML = html;
+}
+
+showCurrentEdition();
 </script>
 </body>
 </html>
