@@ -412,6 +412,13 @@ const DEALS = [
   {"Company":"Itera","Stage":"Seed","Amount (M)":12,"City":"San Francisco","State":"CA","Investors":"Upfront Ventures, Costanoa Ventures, Colle Capital (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"Fluid circuit board technology using liquid metal substrates to reconfigure electronics.","date:Edition Date:start":"2026-06-01"},
   {"Company":"Gray Swan","Stage":"Series A","Amount (M)":40,"City":"Pittsburgh","State":"PA","Investors":"Wing Venture Capital, Madrona (lead); Obvious Ventures, Snowflake Ventures, Hudson River Trading, Samsung Next","Market":"B2B","Women-Founded":"__NO__","Description":"AI security platform that helps enterprises detect and defend against AI-driven threats.","date:Edition Date:start":"2026-06-01"},
   {"Company":"Reactor","Stage":"Series A","Amount (M)":59,"City":"San Francisco","State":"CA","Investors":"Lightspeed Venture Partners (lead); WndrCo, Amplify Partners, Sky9 Capital, FPV Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Developer platform for real-time generative video and world models.","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Orəbella","Stage":"Series A","Amount (M)":null,"City":"Los Angeles","State":"CA","Investors":"Silas Capital (lead); Celebrands","Market":"Consumer","Women-Founded":"__YES__","Description":"Bella Hadid's functional fragrance brand; expanding to Douglas, Selfridges, and Ulta Beauty Middle East.","Source URL":"https://dot.la","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Didit","Stage":"Seed","Amount (M)":7.5,"City":"Los Angeles","State":"CA","Investors":"Rebel Fund (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"AI identity and fraud infrastructure platform.","Source URL":"https://dot.la","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Lastwall","Stage":"Series A","Amount (M)":16,"City":"Arlington","State":"VA","Investors":"Blue Bear Capital (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"Quantum-resilient cybersecurity platform for defense and government.","Source URL":"https://dot.la","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Kubera Health","Stage":"Seed","Amount (M)":6.5,"City":"Los Angeles","State":"CA","Investors":"Upfront Ventures (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"Contract-to-payment automation system for healthcare providers.","Source URL":"https://dot.la","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Volt Harbor","Stage":"Seed","Amount (M)":2,"City":"Ann Arbor","State":"MI","Investors":"MFV Partners (lead)","Market":"B2B","Women-Founded":"__NO__","Description":"Energy storage systems supplier targeting AI data center power demand.","Source URL":"https://www.axios.com/pro-rata","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Hardline","Stage":"Pre-Seed","Amount (M)":2,"City":"Santa Monica","State":"CA","Investors":"Mucker Capital (lead); Suffolk Technologies, StandUp Ventures, Nirman Ventures, Alumni Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Voice-first construction tech that converts jobsite phone calls into structured daily logs, RFIs, punch lists, and change orders.","Source URL":"https://vc.traded.co","date:Edition Date:start":"2026-06-01"},
+  {"Company":"Campo Grande","Stage":"Seed","Amount (M)":4,"City":"New York","State":"NY","Investors":"undisclosed","Market":"Consumer","Women-Founded":"__NO__","Description":"Premium Iberico pork brand positioning the protein as the wagyu of pork inside U.S. grocery cold cases.","Source URL":"https://vc.traded.co","date:Edition Date:start":"2026-06-01"},
   {"Company":"Hermeus","Stage":"Growth","Amount (M)":350,"City":"Atlanta","State":"GA","Investors":"Khosla Ventures","Market":"B2B","Women-Founded":"__NO__","Description":"Defense aviation startup building hypersonic aircraft for the US government and commercial markets.","date:Edition Date:start":"2026-04-13"},
   {"Company":"Sedron Technologies","Stage":"Exit","Amount (M)":500,"City":"Sedro-Woolley","State":"WA","Investors":"Ara Partners (strategic)","Market":"B2B","Women-Founded":"__NO__","Description":"Waste upcycling infrastructure company secured up to $500M strategic investment.","date:Edition Date:start":"2026-04-13"},
   {"Company":"SUJA Life","Stage":"Exit","Amount (M)":100,"City":"Oceanside","State":"CA","Investors":"Goldman Sachs + Jefferies (underwriters)","Market":"Consumer","Women-Founded":"__NO__","Description":"Organic cold-pressed juice brand filed for a $100M IPO; $327M in revenue.","date:Edition Date:start":"2026-04-13"},
@@ -592,7 +599,8 @@ function renderEdition() {
       </div>`;
 
       stageGroups[stage].forEach(d => {
-        const amountStr = d['Amount (M)'] > 0 ? `$${d['Amount (M)'].toLocaleString()}M` : '';
+        const amt = d['Amount (M)'];
+        const amountStr = amt > 0 ? (amt >= 1000 ? `$${(amt/1000).toLocaleString(undefined,{maximumFractionDigits:1})}B` : `$${amt.toLocaleString()}M`) : '';
         const womenBadge = d['Women-Founded'] === '__YES__' ? '<span class="badge women-badge">Women-Founded</span>' : '';
         const marketBadge = `<span class="badge market-badge">${d.Market}</span>`;
 
@@ -654,11 +662,11 @@ function updateStats() {
       Deals
     </div>
     <div class="lede-stat">
-      <strong>$${totalAmount.toLocaleString()}M</strong>
+      <strong>${totalAmount >= 1000 ? (totalAmount/1000).toLocaleString(undefined,{maximumFractionDigits:1})+'B' : totalAmount.toLocaleString()+'M'}</strong>
       Capital
     </div>
     <div class="lede-stat">
-      <strong>$${parseFloat(avgAmount).toLocaleString()}M</strong>
+      <strong>${parseFloat(avgAmount) >= 1000 ? (parseFloat(avgAmount)/1000).toLocaleString(undefined,{maximumFractionDigits:1})+'B' : parseFloat(avgAmount).toLocaleString()+'M'}</strong>
       Average
     </div>
   `;
