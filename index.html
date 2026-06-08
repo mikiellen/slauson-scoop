@@ -606,10 +606,10 @@ function renderEdition() {
   const deals = DEALS.filter(d => d['date:Edition Date:start'] === currentEdition);
   const filtered = applyFilters(deals);
 
-  const dateObj = new Date(currentEdition + 'T00:00:00Z');
+  const dateObj = new Date(currentEdition + 'T12:00:00');
   const weekStart = new Date(dateObj);
-  weekStart.setDate(dateObj.getDate() - 5);
-  const weekEnd = dateObj;
+  const weekEnd = new Date(dateObj);
+  weekEnd.setDate(dateObj.getDate() + 6);
 
   const dateStr = `Week of ${weekStart.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})} – ${weekEnd.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}`;
   document.getElementById('edition-date-header').textContent = dateStr;
