@@ -667,7 +667,7 @@ function renderArchive() {
 
   editions.forEach(date => {
     const dealsInEdition = DEALS.filter(d => d['date:Edition Date:start'] === date);
-    const dateObj = new Date(date + 'T00:00:00Z');
+    const dateObj = new Date(date + 'T12:00:00');
     const dateStr = dateObj.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
     const count = dealsInEdition.length;
 
