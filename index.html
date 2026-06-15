@@ -746,11 +746,11 @@ function updateStats() {
       Deals
     </div>
     <div class="lede-stat">
-      <strong>${totalAmount >= 1000 ? (totalAmount/1000).toLocaleString(undefined,{maximumFractionDigits:1})+'B' : totalAmount.toLocaleString()+'M'}</strong>
+      <strong>$${totalAmount >= 1000 ? (totalAmount/1000).toLocaleString(undefined,{maximumFractionDigits:1})+'B' : totalAmount.toLocaleString()+'M'}</strong>
       Capital
     </div>
     <div class="lede-stat">
-      <strong>${parseFloat(avgAmount) >= 1000 ? (parseFloat(avgAmount)/1000).toLocaleString(undefined,{maximumFractionDigits:1})+'B' : parseFloat(avgAmount).toLocaleString()+'M'}</strong>
+      <strong>$${parseFloat(avgAmount) >= 1000 ? (parseFloat(avgAmount)/1000).toLocaleString(undefined,{maximumFractionDigits:1})+'B' : parseFloat(avgAmount).toLocaleString()+'M'}</strong>
       Average
     </div>
   `;
