@@ -698,10 +698,16 @@ function renderEdition() {
   document.getElementById('deals-body').innerHTML = html;
 }
 
+function editionDateLabel(isoDate) {
+  const mon = new Date(isoDate + 'T12:00:00');
+  const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+  const monStr = mon.toLocaleDateString('en-US', {month: 'long', day: 'numeric'});
+  const sunStr = sun.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+  return 'Week of ' + monStr + ' – ' + sunStr;
+}
+
 function init() {
-  const dateObj = new Date(currentEdition + 'T12:00:00');
-  const dateStr = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
-  document.getElementById('edition-date-header').textContent = 'Week of ' + dateStr;
+  document.getElementById('edition-date-header').textContent = editionDateLabel(currentEdition);
   renderEdition();
   updateStats();
   renderArchive();
@@ -795,6 +801,7 @@ function switchEdition(date) {
     }
   });
   document.getElementById('search-main').value = '';
+  document.getElementById('edition-date-header').textContent = editionDateLabel(date);
   renderEdition();
   updateStats();
   showTab('edition');
